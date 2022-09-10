@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+     <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <!-- Bootstrap CSS -->
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+          <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+          <link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico"/>
+
+          {% if title %}
+               <title>euPOLIS NBS Preliminary Selection Tool - {{ title }}</title>
+          {% else %}
+               <title>euPOLIS NBS Preliminary Selection Tool</title>
+          {% endif %}
+
+          <!-- Just in case i want more css libraries in some html pages -->
+          {% block more_heading %}
+          {% endblock %}
+
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     </head>
+     <body>
+          <!-- Maybe the solution is to make the img tags behave as block elements and not the anchor tags as the img tag displays the images -->
+          <a target="_blank" href="https://eupolis-project.eu/"><img id="eupolis-img-container" src="../static/images/eupolis_logo.png" alt="Eupolis Logo" style="width:5%;"></a>
+          <a target="_blank" href="https://uwmh.eu/"><img id="uwmh-img-container" src="../static/images/uwmh_logo.jpg" alt="UWMH Logo" style="width:10%;"></a>
+          <a target="_blank" href="https://www.resilienceguard.ch/"><img id="rg-img-container" src="../static/images/rg_logo.jpg" alt="RG Logo" style="width:10%;"></a>
+
+          <ul class="nav-bar">
+               <li><a class="active" href="{{ url_for('home_page') }}">Home</a></li>
+               <li><a href="{{ url_for('nbs_page') }}">NBS Preliminary Selection Tool</a></li>
+               {% if current_user.is_authenticated %}
+               <li><a href="{{ url_for('account_page') }}">Account</a></li>
+               <li><a href="{{ url_for('logout_page') }}">Logout</a></li>
+               {% else %}
+                    <li><a href="{{ url_for('login_page') }}">Login</a></li>
+                    <li><a href="{{ url_for('register_page') }}">Register</a></li>
+               {% endif %}
+          </ul>
+
+          {% with messages = get_flashed_messages(with_categories=true) %}
+               {% if messages %}
+                    {% for category, message in messages %}
+                         <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                             <span>{{ message }}</span>
+                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                             </button>
+                         </div>
+                    {% endfor %}
+               {% endif %}
+          {% endwith %}
+
+          {% block content %}
+          {% endblock %}
+
+     </body>
+</html>

@@ -1,0 +1,457 @@
+{% extends "layout.html" %}
+
+{% block more_heading %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+     {{ active_site.title }}
+</div>
+
+<div class="table-responsive content-section text-center" style="font-size: 16px;">
+     <table class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
+          <thead class="thead-dark">
+          <tr>
+           <th scope="col" class="align-middle">#</th>
+           <th scope="col" class="align-middle">Concern</th>
+           {% for i in range(total_nbs_counter) %}
+                <th scope="col" class="align-middle">{{ nbs_names_html[i] }}</th>
+           {% endfor %}
+          </tr>
+          </thead>
+          <tbody>
+               {% for i in range(total_ci_counter) %}
+                    <tr>
+                    <th scope="row" class="align-middle">{{ i + 1 }}</th>
+
+                    <td>{{ all_ci_ordered[i].title }}</td>
+
+                    {% for j in range(total_nbs_counter) %}
+                         <td>{{ all_nbs_ci_ordered[i][j].impact }}</td>
+                    {% endfor %}
+                    </tr>
+               {% endfor %}
+          </tbody>
+     </table>
+</div>
+
+<div class="table-responsive content-section text-center" style="font-size: 16px;">
+     <table class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Overall Performance</caption>
+          <thead class="thead-dark">
+               <tr>
+                    <th scope="col" class="align-middle">Scores</th>
+                    {% for i in range(1, total_nbs_counter+1) %}
+                         <th scope="col" class="align-middle" id="solution-{{ i }}">{{ all_nbs_ordered[i-1].title }}</th>
+                    {% endfor %}
+               </tr>
+          </thead>
+          <tbody>
+               <tr>
+                    <th scope="row">Urban Score</th>
+                    {% for i in range(total_nbs_counter) %}
+                         <td>
+                              {{ "%.2f"|format(final_scores[0][i] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+               <tr>
+                    <th scope="row">Environmental Score</th>
+                    {% for i in range(total_nbs_counter) %}
+                         <td>
+                              {{ "%.2f"|format(final_scores[1][i] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+               <tr>
+                    <th scope="row">Social Score</th>
+                    {% for i in range(total_nbs_counter) %}
+                         <td>
+                              {{ "%.2f"|format(final_scores[2][i] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+               <tr>
+                    <th scope="row">Economic Score</th>
+                    {% for i in range(total_nbs_counter) %}
+                         <td>
+                              {{ "%.2f"|format(final_scores[3][i] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+               <tr>
+                    <th scope="row">PW & WB Score</th>
+                    {% for i in range(total_nbs_counter) %}
+                         <td>
+                              {{ "%.2f"|format(final_scores[4][i] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+               <tr>
+                    <th scope="row">Overall Score</th>
+
+                    {% for i in range(1, total_nbs_counter+1) %}
+                         <td id="nbs_{{i}}_overall_score">
+                              {{ "%.2f"|format(final_scores[5][i-1] * 100) }}
+                         </td>
+                    {% endfor %}
+               </tr>
+          </tbody>
+     </table>
+</div>
+
+
+<div class="table-responsive content-section text-center" style="font-size: 16px;">
+     <table id="top-priority-table" class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          {% if top_counter == 0 %}
+               <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
+          {% else %}
+               <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
+          {% endif %}
+          <thead class="thead-dark">
+               <tr>
+                    <th scope="col" class="align-middle">NBS (Descending Order)</th>
+                    <th scope="col" class="align-middle">NBS Overall Score</th>
+
+                    {% for i in range(total_ci_counter) %}
+                         {% if all_ci_ordered[i].top == "Yes" %}
+                              <th scope="col" class="align-middle">{{ all_ci_ordered[i].title }}</th>
+                         {% endif %}
+                    {% endfor %}
+               </tr>
+          </thead>
+          <tbody>
+               {% for i in range(total_nbs_counter) %}
+                    <tr>
+                         <th scope="row">{{ nbs_descending_order[i].title }}</th>
+                         <td>{{ "%.2f"|format(overall_scores_descending_order[i] * 100) }}</td>
+
+                         {% for j in range(nbs_descending_order_against_top[i]|length) %}
+                         <td>{{ nbs_descending_order_against_top[i][j] }}</td>
+                         {% endfor %}
+
+                    </tr>
+               {% endfor %}
+          </tbody>
+     </table>
+</div>
+
+<!-- GRAPH 1 - Overall Scores of all NBS -->
+<div style="width:65vw; margin:auto;" class="mt-4">
+     <canvas id="chart1"></canvas>
+     <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart1')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+</div>
+
+{% for i in range(total_nbs_counter) %}
+     <!-- RADAR CHART -->
+     <div style="display:inline-block; width:35vw;" class="mt-4 pl-3">
+          <canvas id="chart{{i}}-1"></canvas>
+          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-1`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
+     </div>
+
+     <!-- BAR CHART -->
+     <div style="display:inline-block; width:60vw;">
+          <canvas id="chart{{i}}-2"></canvas>
+          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-2`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
+     </div>
+{% endfor %}
+
+
+<!-- FINAL BUTTONS AT THE BOTTOM OF THE PAGE -->
+<div class="text-center mb-4 pb-4 mt-4 pt-4">
+     <!-- <a class="btn btn-primary btn-lg mr-4" href="#">Download PDF Report</a> -->
+     <form class="mb-4" action="{{ url_for('generatePdf2') }}" method="POST">
+          <input class="btn btn-primary btn-lg mt-4" type="submit" value="Download Final NBS Report">
+          <br>
+          <br>
+          <a class="mt-4 btn btn-primary btn-lg" href="{{ url_for('nbs_page_2') }}">Back To Configurations</a>
+     </form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+
+<script type="text/javascript">
+
+     // Some initial configurations
+     // Chart.register.apply(null, Object.values(CHART).filter((chartClass) => (chartClass.id)));
+     Chart.defaults.font.size = 16;
+     // Chart.defaults.font.family = 'Arial';
+
+     // Plots plugin function to make the black background disappear from the downloadable pdf
+     const bgColor = {
+          id: 'bgColor',
+          beforeDraw: (chart, steps, options) => {
+               const {ctx, width, height} = chart
+               ctx.fillStyle = options.backgroundColor
+               ctx.fillRect(0, 0, width, height)
+               ctx.restore()
+          }
+     }
+
+     // SECTION OF DETERMINING THE BACKGROUND COLORS OF THE TOP PRIORITIES TABLE
+     top_priority_table = document.getElementById('top-priority-table')
+
+     const top_counter = {{ top_counter }}
+
+     const cellsLength = top_priority_table.children[2].childNodes[1].children.length
+     const tableLength = top_priority_table.children[2].childNodes.length
+
+     for (let i=1; i<tableLength; i+=2) {
+          for (let j=cellsLength-top_counter; j<cellsLength; j++) {
+               if (top_priority_table.children[2].childNodes[i].children[j].innerText == "Direct Impact") {
+                    if (j == 2) {
+                         top_priority_table.children[2].childNodes[i].children[j].style.backgroundColor = 'rgba(170, 255, 0, 0.5)'
+                    }
+                    else if (j == 3) {
+                         top_priority_table.children[2].childNodes[i].children[j].style.backgroundColor = 'rgba(54, 162, 235, 0.5)'
+                    }
+                    else {
+                         top_priority_table.children[2].childNodes[i].children[j].style.backgroundColor = 'rgba(255, 206, 86, 0.5)'
+                    }
+               }
+          }
+     }
+
+     const total_nbs_counter = {{ total_nbs_counter }}
+
+     // Chart 1 Section - This is the first chart depecting the overall scores of all NBS (best solution bar is highlighted in green)
+     let overall_scores = {{ overall_scores|safe }}
+     overall_scores = overall_scores.map(x => x * 100) // multilpy all scores by 100
+
+     const nbs_names = {{ nbs_names|safe }}
+
+     const best_solution_index = {{ best_solution_index }}
+
+     // Lets color the solutions nicely
+     const chart1_backgroundColor = []
+     const chart1_borderColor = []
+     for (let i = 0; i < total_nbs_counter; i++) {
+          chart1_backgroundColor.push('rgba(54, 162, 235, 0.5)')
+          chart1_borderColor.push('rgba(54, 162, 235, 1)')
+     }
+     chart1_backgroundColor[best_solution_index] = 'rgba(34, 139, 34, 0.5)'
+     chart1_borderColor[best_solution_index] = 'rgba(34, 139, 34, 1)'
+
+     const ctx1 = document.getElementById('chart1').getContext('2d');
+     const chart1 = new Chart(ctx1, {
+         type: 'bar',
+         data: {
+             labels: nbs_names,
+             datasets: [{
+                 // label: '# of Votes',
+                 data: overall_scores,
+                 backgroundColor: chart1_backgroundColor,
+                 borderColor: chart1_borderColor,
+                 borderWidth: 1
+             }]
+         },
+         options: {
+              plugins: {
+                   bgColor: {
+                        backgroundColor: "#85dcbb"
+                   },
+                  legend: {
+                      display: false,
+                 },
+                 title: {
+                      display: true,
+                      text: "NBS Total Efficiency Index",
+                      font: {size: 32}
+                 },
+                 labels: {
+                          render: () => {}
+                     },
+                tooltip: {
+                     callbacks: {
+                          title: function(context) {
+                               return context[0].label
+                          },
+                          label: function(context) {
+                             return `${context.raw.toFixed(2)}`
+                        }
+                     }
+                    }
+               },
+             scales: {
+                 y: {
+                     display: true,
+                     grid: {display: false},
+                     min:0,
+                     max:100
+                },
+                x: {
+                    display: true,
+                    grid: {display: false}
+                }
+           }
+        },
+        plugins: [bgColor]
+     });
+
+
+     // ALL OTHER CHARTS
+
+     final_scores_traversed = {{ final_scores_traversed|safe }}
+     all_nbs_ci_ordered_impact_with_importances_traversed = {{ all_nbs_ci_ordered_impact_with_importances_traversed|safe }}
+     problems_names = {{ problems_names|safe }}
+     full_problems = {{ full_problems|safe }}
+
+     let charts_background_colors = []
+     let charts_border_colors = []
+
+     for (let category of full_problems) {
+          for (let i = 1; i < category.length; i++) {
+               if (category[0] == "Urban") {
+                    charts_background_colors.push('rgba(255, 99, 132, 0.5)')
+                    charts_border_colors.push('rgba(255, 99, 132, 1)')
+               }
+               else if (category[0] == "Environmental") {
+                    charts_background_colors.push('rgba(54, 162, 235, 0.5)')
+                    charts_border_colors.push('rgba(54, 162, 235, 1)')
+               }
+               else if (category[0] == "Social") {
+                    charts_background_colors.push('rgba(255, 206, 86, 0.5)')
+                    charts_border_colors.push('rgba(255, 206, 86, 1)')
+               }
+               else if (category[0] == "Economic/Business") {
+                    charts_background_colors.push('rgba(34, 139, 34, 0.5)')
+                    charts_border_colors.push('rgba(34, 139, 34, 1)')
+               }
+               else if (category[0] == "PH & WB (Public Health & Well Being)") {
+                    charts_background_colors.push('rgba(153, 102, 255, 0.5)')
+                    charts_border_colors.push('rgba(153, 102, 255, 1)')
+               }
+          }
+     }
+
+
+     for (let i = 0; i < total_nbs_counter; i++) {
+
+          // RADAR CHART
+          const ctx1 = document.getElementById(`chart${i}-1`).getContext('2d');
+          const chart1 = new Chart(ctx1, {
+              type: 'radar',
+              data: {
+                   labels: [
+                     'Ubran Score',
+                     'Environmental Score',
+                     'Social Score',
+                     'Economic Score',
+                     'PH & WB Score'
+                   ],
+                   datasets: [{
+                     data: final_scores_traversed[i],
+                     fill: true,
+                     backgroundColor: 'rgba(34, 139, 34, 0.5)',
+                     borderColor: 'rgba(34, 139, 34, 1)',
+                     pointBackgroundColor: 'rgba(34, 139, 34, 1)',
+                     pointHoverBackgroundColor: '#fff',
+                     pointHoverBorderColor: 'rgba(34, 139, 34, 1)'}]
+                },
+              options: {
+                   plugins: {
+                       legend: {
+                           display: false,
+                      },
+                      title: {
+                           display: true,
+                           text: `${nbs_names[i]}`,
+                           font: {size: 26}
+                      },
+                      bgColor: {
+                          backgroundColor: "#85dcbb"
+                      },
+                      tooltip: {
+                            callbacks: {
+                                 title: function(context) {
+                                      return context[0].label
+                                 },
+                                 label: function(context) {
+                                   return `${context.raw.toFixed(2)}`
+                              }
+                            }
+                         }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: false
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+             },
+             plugins: [bgColor]
+          });
+
+          // BAR CHART
+          const ctx2 = document.getElementById(`chart${i}-2`).getContext('2d');
+          const chart2 = new Chart(ctx2, {
+              type: 'bar',
+              data: {
+                  labels: problems_names,
+                  datasets: [{
+                      data: all_nbs_ci_ordered_impact_with_importances_traversed[i],
+                      backgroundColor: charts_background_colors,
+                      borderColor: charts_border_colors,
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                   plugins: {
+                       legend: {
+                           display: false,
+                      },
+                      title: {
+                           display: true,
+                           text: `${nbs_names[i]}`,
+                           font: {size: 26}
+                      },
+                      bgColor: {
+                          backgroundColor: "#85dcbb"
+                      },
+                      labels: {
+                           fontSize: 0
+                     }
+                    },
+                  scales: {
+                      y: {
+                          display: true,
+                          grid: {display: false},
+                          title: {
+                               display: true,
+                               text: "NBS Performance"}
+                     },
+                     x: {
+                         display: true,
+                         grid: {display: false},
+                         ticks: {
+                                 font: {
+                                     size: 12,
+                                 }
+                              }
+                     }
+                  }
+             },
+             plugins: [bgColor]
+          });
+     }
+
+
+     // This is the function that makes all the buttons which download all charts as images work correctly
+     function downloadChartAsImage(canvas_id) {
+          const imageLink = document.createElement('a')
+          const canvas = document.getElementById(canvas_id)
+          imageLink.download = 'chart.png'
+          imageLink.href = canvas.toDataURL('image/png', 1)
+          imageLink.click()
+     }
+
+</script>
+
+{% endblock content %}

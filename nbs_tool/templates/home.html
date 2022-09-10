@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="home-content-container">
+     <p class="text-center">Welcome to the EuPOLIS Nature-Based Solutions (NBS) Preliminary Selection Tool</p>
+
+     <p style="font-size:1.2vw;">
+          Urban planners and engineers are increasingly adopting the Nature-Based Solution (NBS) paradigm to address contemporary
+          challenges faced within urban areas in a sustainable manner. The EU-funded
+          <a target="_blank" href="https://eupolis-project.eu/">euPOLIS project</a> aims to showcase that the deployment
+          of NBS has several multi-dimensional benefits (e.g. environmental, social, urban, economic) including the enhancement of Public
+          Health and Well-Being. The overall scope of the project is to offer an urban planning methodology that integrates existing
+          natural and engineered urban systems to enable the regeneration and rehabilitation of urban ecosystems in a more informed
+          and structured manner. The project solutions and tools will be tested in a series of demonstration sites located in four
+          European cities: Belgrade, Lodz, Piraeus, and Gladsaxe.
+     </p>
+     <p style="font-size:1.2vw;">
+          As part of the aforementioned framework, a methodology was developed for assisting urban planners in the preliminary
+          selection/prioritisation of possible NBS, from those that were initially considered for a particular urban site.
+          The methodology explicitly accounts for the ability/efficiency of each NBS to mitigate the most important concerns of
+          the said site as those were identified following a first-order site screening process. This methodology is herein
+          offered in the form of a tool for easier implementation. The development of the online tool is a joint effort of the
+          National Technical University of Athens (Urban Water Management and Hydroinformatics
+          (<a target="_blank" href="https://uwmh.eu/">UWMH</a>) group) and
+          <a target="_blank" href="https://www.resilienceguard.ch/">Resilience Guard GmbH</a>.
+     </p>
+
+     <br>
+     <a id="get-started-link" href="{{ url_for('nbs_page') }}">Get Started</a>
+</div>
+
+<div class="text-center" style="width:33%; font-size:13px; margin-left:2.5vw; position:relative; bottom:0.8vw;">
+     <p style="font-size:20px; font-weight:bold;">euPOLIS Funding</p>
+     <a style="position:relative;bottom:10px;" target="_blank" href="https://european-union.europa.eu/index_en"><img src="../static/images/euro-union.png" alt="EU" style="width:9.5%;"></a>
+     <p>The euPOLIS project has received funding from the European Union’s Horizon 2020 Research & Innovation programme H2020-EU.3.5.2., under grant agreement No 869448</p>
+</div>
+
+<p id="copyright-text">&copy; 2022 URBAN WATER MANAGEMENT AND HYRDROINFORMATICS GROUP & RESILIENCE GUARD</p>
+
+{% endblock content %}

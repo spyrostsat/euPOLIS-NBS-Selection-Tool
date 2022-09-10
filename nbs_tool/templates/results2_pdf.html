@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+     <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <!-- Bootstrap CSS -->
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+          <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+          <link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico"/>
+
+          {% if title %}
+               <title>euPOLIS NBS Preliminary Selection Tool - {{ title }}</title>
+          {% else %}
+               <title>euPOLIS NBS Preliminary Selection Tool</title>
+          {% endif %}
+
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     </head>
+     <body>
+          <div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+               {{ active_site.title }}
+          </div>
+
+          <div class="table-responsive content-section text-center" style="font-size: 11px;">
+               <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
+                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
+                    <thead>
+                    <tr>
+                     <th scope="col" class="align-middle">#</th>
+                     <th scope="col" class="align-middle">Concern</th>
+                     {% for i in range(total_nbs_counter) %}
+                          <th scope="col" class="align-middle">{{ nbs_names[i] }}</th>
+                     {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                         {% for i in range(total_ci_counter) %}
+                              <tr>
+                              <th scope="row" class="align-middle">{{ i + 1 }}</th>
+
+                              <td>{{ all_ci_ordered[i].title }}</td>
+
+                              {% for j in range(total_nbs_counter) %}
+                                   <td>{{ all_nbs_ci_ordered[i][j].impact }}</td>
+                              {% endfor %}
+                              </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+          <div class="table-responsive content-section text-center" style="font-size: 11px;">
+               <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
+                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Overall Performance</caption>
+                    <thead>
+                         <tr>
+                              <th scope="col" class="align-middle">Scores</th>
+                              {% for i in range(1, total_nbs_counter+1) %}
+                                   <th scope="col" class="align-middle" id="solution-{{ i }}">{{ all_nbs_ordered[i-1].title }}</th>
+                              {% endfor %}
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th scope="row">Urban Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[0][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Environmental Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[1][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Social Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[2][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Economic Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[3][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">PW & WB Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[4][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Overall Score</th>
+
+                              {% for i in range(1, total_nbs_counter+1) %}
+                                   <td id="nbs_{{i}}_overall_score">
+                                        {{ "%.2f"|format(final_scores[5][i-1] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                    </tbody>
+               </table>
+          </div>
+
+
+          <div class="table-responsive content-section text-center" style="font-size: 11px;">
+               <table id="top-priority-table" class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
+                    {% if top_counter == 0 %}
+                         <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
+                    {% else %}
+                         <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
+                    {% endif %}
+                    <thead>
+                         <tr>
+                              <th scope="col" class="align-middle">NBS (Descending Order)</th>
+                              <th scope="col" class="align-middle">NBS Overall Score</th>
+
+                              {% for i in range(total_ci_counter) %}
+                                   {% if all_ci_ordered[i].top == "Yes" %}
+                                        <th scope="col" class="align-middle">{{ all_ci_ordered[i].title }}</th>
+                                   {% endif %}
+                              {% endfor %}
+                         </tr>
+                    </thead>
+                    <tbody>
+                         {% for i in range(total_nbs_counter) %}
+                              <tr>
+                                   <th scope="row">{{ nbs_descending_order[i].title }}</th>
+                                   <td>{{ "%.2f"|format(overall_scores_descending_order[i] * 100) }}</td>
+
+                                   {% for j in range(nbs_descending_order_against_top[i]|length) %}
+                                   <td>{{ nbs_descending_order_against_top[i][j] }}</td>
+                                   {% endfor %}
+
+                              </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+
+          <div class="table-responsive text-center" style="font-size: 11px;">
+               <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
+                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performances Against Every Main Concern</caption>
+                    <thead>
+                    <tr>
+                     <th scope="col" class="align-middle">#</th>
+                     <th scope="col" class="align-middle">Concern</th>
+                     {% for i in range(total_nbs_counter) %}
+                          <th scope="col" class="align-middle">{{ nbs_names[i] }}</th>
+                     {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                         {% for i in range(total_ci_counter) %}
+                              <tr>
+                               <th scope="row" class="align-middle">{{ i + 1 }}</th>
+
+                               <td>{{ all_ci_ordered[i].title }}</td>
+
+                              {% for j in range(total_nbs_counter) %}
+                                   <td>{{ all_nbs_ci_ordered_impact_with_importances[i][j] }}</td>
+                              {% endfor %}
+                              </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+
+     </body>
+</html>
