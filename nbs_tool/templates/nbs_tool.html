@@ -2,75 +2,30 @@
 
 {% block content %}
 
-<!-- ALL SITES SECTION -->
-<div class="content-section text-center">
-     <form action="{{ url_for('update_active_site') }}" method="POST">
-          <fieldset class="form-group">
-               <legend class="border-top h2 pt-3">Active Site</legend>
-                    <div class="form-group">
-                         <select class="text-center form-control form-control-lg" name="all-sites">
-                              {% for site in current_user.site %}
-                                   <option value="{{site.title}}"
-                                   {% if site.title==active_site.title %}
-                                        selected="selected"
-                                   {% endif %}
-                                   >
-                                   {{site.title}}
-                                   </option>
-                              {% endfor %}
-                         </select>
-                         <input class="mt-4 btn btn-outline-primary btn-md" type="submit" value="Change Active Site">
-                         <button type="button" class="mt-4 ml-3 btn btn-outline-danger btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Change Active Site's Title</button>
-                    </div>
-          </fieldset>
-     </form>
-     <!-- CHANGE ACTIVE SITE's TITLE SECTION -->
-</div>
-
-<!-- Change Title Modal -->
-<div class="modal fade" id="TitleModal" tabindex="-1" aria-labelledby="TitleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-     <p class="modal-title" id="TitleModalLabel">Type a new title for the active site</p>
-     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-     </button>
-</div>
-<div class="modal-footer">
-   <form action="{{ url_for('update_active_site_title')}}" method="POST">
-        <input class="text-center form-control form-control-lg" type="text" name="site_title" size="40" value="{{ active_site.title }}">
-        <button type="button" class="btn btn-secondary mt-3 ml-4 mr-4" data-bs-dismiss="modal">Cancel</button>
-        <input class="btn btn-danger mt-3 ml-4" type="submit" value="Change Title">
-   </form>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="content-section text-center">
+<div class="container text-center">
      <!-- CREATE NEW SITE SECTION -->
      <form action="{{ url_for('create_new_site') }}" method="POST">
           <fieldset class="form-group">
                <legend class="border-top h2 pt-3">Create New Site</legend>
                     <div class="form-group">
-                         <input class="text-center form-control form-control-lg" type="text" name="site_title" size="40" placeholder="Type New Site's Name">
-                         <input class="mt-4 btn btn-outline-primary btn-md" type="submit" value="Create Site">
+                         <input class="text-center form-control form-control-sm" type="text" name="site_title" size="40" placeholder="Type New Site's Name">
+                         <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Create Site">
                     </div>
           </fieldset>
      </form>
+
      <!--DELETE SITE SECTION-->
      <form action="{{ url_for('delete_site') }}" method="POST">
           <fieldset class="form-group">
                <legend class="border-top h2 pt-3">Delete Existing Site</legend>
                     <div class="form-group">
-                         <select class="text-center form-control form-control-lg" name="all-sites">
+                         <select class="text-center form-control form-control-sm" name="all-sites">
                               <option value="-1"> </option>
                               {% for site in current_user.site %}
                                    <option value="{{site.id}}">{{site.title}}</option>
                               {% endfor %}
                          </select>
-                         <button type="button" class="mt-4 btn btn-outline-danger btn-md m-2 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Chosen Site</button>
+                         <button type="button" class="mt-2 mb-4 btn btn-outline-info btn-sm m-2 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Chosen Site</button>
                     </div>
           </fieldset>
           <!-- Delete Modal -->
@@ -92,15 +47,63 @@
      </form>
 </div>
 
+<!-- ALL SITES SECTION -->
+<div class="container text-center">
+     <form action="{{ url_for('update_active_site') }}" method="POST">
+          <fieldset class="form-group">
+               <legend class="h2">Select Active Site</legend>
+                    <div class="form-group">
+                         <select class="text-center form-control form-control-sm" name="all-sites">
+                              {% for site in current_user.site %}
+                                   <option value="{{site.title}}"
+                                   {% if site.title==active_site.title %}
+                                        selected="selected"
+                                   {% endif %}
+                                   >
+                                   {{site.title}}
+                                   </option>
+                              {% endfor %}
+                         </select>
+                         <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Set Active Site">
+                    </div>
+          </fieldset>
+     </form>
+</div>
+
 <!-- HERE STARTS THE SECTION OF MODIFICATIONS AGAINST ALL INPUTS/PARAMETERS OF THE ACTIVE SITE -->
 
+<!-- Change Title Modal -->
+<div class="modal fade" id="TitleModal" tabindex="-1" aria-labelledby="TitleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+     <p class="modal-title" id="TitleModalLabel">Type a new title for the active site</p>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+     </button>
+</div>
+<div class="modal-footer">
+   <form action="{{ url_for('update_active_site_title')}}" method="POST">
+        <input class="text-center form-control form-control-lg" type="text" name="site_title" size="40" value="{{ active_site.title }}">
+        <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Cancel</button>
+        <input class="btn btn-info mt-3 ms-5" type="submit" value="Change Title">
+   </form>
+</div>
+</div>
+</div>
+</div>
+
 <!-- HERE WE DECLARE THE NAME OF THE ACTIVE SITE JUST TO MAKE IT CLEAR -->
-<div class="text-center" style="font-size:50px; font-weight:bold;">
-     Active Site: {{ active_site.title }}
+<div class="container text-center border-top">
+     <div class="fs-1 fw-bold mt-4">
+          Active Site: {{ active_site.title }}
+     </div>
+     <div class="text-center">
+          <button type="button" class="btn btn-outline-info btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Change Active Site's Title</button>
+     </div>
 
      <form class="" action="{{ url_for('update_nbs_data') }}" method="POST">
-          <div class="table-responsive content-section text-center" style="font-size: 14px;">
-               <table id="my-table" class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          <div class="table-responsive container text-center" style="font-size: 14px;">
+               <table id="my-table" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
                     <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns Assessment</caption>
                     <thead class="thead-dark">
                     <tr>
@@ -147,15 +150,27 @@
                     {% endfor %}
                     <tfoot>
                          <tr>
-                              <th colspan="5" class="pt-3 pb-3"><input style="font-size:35px;" class="btn btn-primary btn-lg" type="submit" value="Save Changes"></th>
+                              <th colspan="5" class="pt-3 pb-3"><input class="fs-4 btn btn-outline-info" type="submit" value="Save Changes"></th>
                          </tr>
                     </tfoot>
                     </tbody>
                </table>
           </div>
      </form>
+     <div class="container">
+       <div class="row align-items-center">
+         <div class="col">
+              <button type="button" class="btn btn-light btn-md" data-bs-toggle="modal" data-bs-target="#addModal">Add a custom concern</button>
+         </div>
+         <div class="col">
+              <button type="button" class="btn btn-light btn-md" data-bs-toggle="modal" data-bs-target="#renameModal">Rename a concern</button>
+         </div>
+         <div class="col">
+              <button type="button" class="btn btn-light btn-md" data-bs-toggle="modal" data-bs-target="#removeModal">Remove a concern</button>
+         </div>
+       </div>
+     </div>
 
-     <button type="button" class="btn btn-outline-primary btn-md mt-4 mr-4 mb-4" data-bs-toggle="modal" data-bs-target="#addModal">Add a custom concern</button>
      <!-- Add Modal -->
      <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -174,9 +189,9 @@
                          <option value="Economic/Business">Economic/Business</option>
                          <option value="PH & WB (Public Health & Well Being)">PH & WB (Public Health & Well Being)</option>
                   </select>
-                  <input class="text-center form-control form-control-lg" type="text" required name="concern_name" size="100" placeholder="New Concern's Name">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-danger" type="submit" value="Add Concern">
+                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_name" size="100" placeholder="New Concern's Name">
+                  <button type="button" class="mt-4 btn btn-info" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-4" type="submit" value="Add Concern">
              </form>
           </div>
           </div>
@@ -184,7 +199,6 @@
      </div>
 
 
-     <button type="button" class="btn btn-outline-primary btn-md mt-4 mr-4 mb-4" data-bs-toggle="modal" data-bs-target="#renameModal">Rename a concern</button>
      <!-- Rename Modal -->
      <div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="renameModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -201,16 +215,15 @@
                             <option value="{{ concern.title }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
-                  <input class="text-center form-control form-control-lg" type="text" required name="concern_new_name" size="100" placeholder="Concern's New Name">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-danger" type="submit" value="Rename Concern">
+                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_new_name" size="100" placeholder="Concern's New Name">
+                  <button type="button" class="btn btn-info mt-3" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-3" type="submit" value="Rename Concern">
              </form>
           </div>
           </div>
           </div>
      </div>
 
-     <button type="button" class="btn btn-outline-primary btn-md mt-4 ml-4 mb-4" data-bs-toggle="modal" data-bs-target="#removeModal">Remove a concern</button>
      <!-- Remove Modal -->
      <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -227,8 +240,8 @@
                             <option value="{{ concern.id }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-danger" type="submit" value="Remove Concern">
+                  <button type="button" class="btn btn-info mt-3" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-3" type="submit" value="Remove Concern">
              </form>
           </div>
           </div>
@@ -238,7 +251,7 @@
 </div>
 
 <div class="text-center mb-3">
-     <a class="mt-4 mb-4 btn btn-primary btn-lg pl-4 pr-4" href="{{ url_for('results_page') }}" style="font-size:50px;">Assess Concerns</a>
+     <a class="my-5 btn btn-info btn-md fs-3" href="{{ url_for('results_page') }}">View Concerns Assessment</a>
 </div>
 
 <script type="text/javascript">

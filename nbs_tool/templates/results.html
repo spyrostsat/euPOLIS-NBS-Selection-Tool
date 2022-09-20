@@ -6,12 +6,12 @@
 
 {% block content %}
 
-<div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+<div class="text-center mt-4 fw-bold display-5">
      {{ active_site.title }}
 </div>
 
-<div id="my-container">
-     <table id="table-1" style="width:70%; margin:auto; font-size:11px;" class="table table-hover table-bordered table-info table-sm mt-1" border="1" style="border:2px solid #000000; border-collapse:collapse">
+<div class="table-responsive container text-center" style="font-size: 14px;">
+     <table id="table-1" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
      <caption class="" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns - Baseline Assessment</caption>
      <thead class="thead-dark">
           <tr>
@@ -47,7 +47,8 @@
        </tbody>
      </table>
      <br>
-     <table id="table-2" style="width:70%; margin:auto; font-size:11px;" class="table table-hover table-bordered table-info table-sm mt-4" border="1" style="border:2px solid #000000; border-collapse:collapse">
+
+     <table id="table-2" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
           <thead class="thead-dark">
           <tr>
           <th scope="col" class="align-middle text-center"></th>
@@ -55,7 +56,7 @@
            <th scope="col" class="align-middle text-center">Environmental</th>
            <th scope="col" class="align-middle text-center">Social</th>
            <th scope="col" class="align-middle text-center">Economic</th>
-           <th scope="col" class="align-middle text-center">PH % WB</th>
+           <th scope="col" class="align-middle text-center">PH & WB</th>
            <th scope="col" class="align-middle text-center">Overall</th>
           </tr>
           </thead>
@@ -79,32 +80,48 @@
                 <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[5]|float}}</td>
                </tr>
      </table>
-
-
-     <div class="mt-4 pt-4 mr-4" style="display:inline-block; width:35vw;">
-          <canvas id="chart1"></canvas>
-          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart1')"><i class="fa fa-save" style="font-size:20px;"></i></button>
-     </div>
-
-     <div style="display:inline-block; width:55vw;">
-          <canvas id="chart2"></canvas>
-          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart2')"><i class="fa fa-save" style="font-size:20px;"></i></button>
-     </div>
-
-     <div class="mt-4 pt-4 pl-3 ml-3" style="width:95vw;">
-          <canvas id="chart3"></canvas>
-          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart3')"><i class="fa fa-save" style="font-size:20px;"></i></button>
-     </div>
 </div>
 
-<div class="text-center mb-4 pb-4 mt-4">
-     <!-- <a class="btn btn-primary btn-lg mr-4" href="#">Download PDF Report</a> -->
-     <form class="mb-4" action="{{ url_for('generatePdf1') }}" method="POST">
-          <input class="btn btn-primary btn-lg" type="submit" value="Download Baseline Assessment Report">
-     </form>
-     <a class="mt-4 btn btn-primary btn-lg mr-4" href="{{ url_for('nbs_page') }}">Back To The Concerns Configurations</a>
-     <a class="mt-4 btn btn-primary btn-lg ml-4" href="{{ url_for('nbs_page_2') }}">Proceed To The NBS Configurations</a>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col col-lg-4">
+         <canvas id="chart1"></canvas>
+         <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart1')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+    </div>
+    <div class="col col-lg-8">
+         <canvas id="chart2"></canvas>
+         <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart2')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+    </div>
+  </div>
 </div>
+
+<div class="container mt-5">
+  <div class="row">
+       <div class="col col-lg-11">
+            <canvas id="chart3"></canvas>
+            <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart3')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+       </div>
+ </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-evenly">
+    <div class="col">
+         <a class="my-4 btn btn-info" href="{{ url_for('nbs_page') }}">Back (Concerns Configurations)</a>
+    </div>
+    <div class="col align-self-center">
+         <form class="my-4 text-center" action="{{ url_for('generatePdf1') }}" method="POST">
+              <input class="btn btn-info" type="submit" value="Download Report">
+         </form>
+    </div>
+    <div class="col">
+         <a class="my-4 btn btn-info" href="{{ url_for('nbs_page_2') }}">Proceed (NBS Configurations)</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- javascript -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>

@@ -1,53 +1,44 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="content-section text-center">
+<div class="container text-center">
       <div class="media">
-        <div class="media-body">
-          <p class="text-secondary pt-3 pb-1 h5">username: {{ current_user.username }}</p>
-          <p class="text-secondary h5 pb-2">email: {{ current_user.email }}</p>
+        <div class="media-body my-4">
+          <p class="text-secondary h5">username: {{ current_user.username }}</p>
+          <p class="text-secondary h5">email: {{ current_user.email }}</p>
         </div>
       </div>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-3">Update Account Settings</legend>
-                <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
+                 <legend class="mb-3 display-5">Update Account Settings</legend>
+                    {{ form.username.label(class="form-label") }}
 
                     {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        {{ form.username(class="form-control form-control-sm is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form-control form-control-md text-center") }}
+                        {{ form.username(class="form-control form-control-sm text-center mb-4") }}
                     {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
+                    {{ form.email.label(class="form-label") }}
                     {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        {{ form.email(class="form-control form-control-lg sm-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-md text-center") }}
+                        {{ form.email(class="form-control form-control-sm text-center mb-4") }}
                     {% endif %}
-                </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
+                {{ form.submit(class="btn btn-info") }}
        </form>
+       <button type="button" class="btn btn-danger btn-md m-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
  </div>
-     <div class="justify-content-center text-center pr-2 pt-2">
-          <button type="button" class="btn btn-outline-danger btn-md m-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
-     </div>
+
      <!-- Delete Modal -->
      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
      <div class="modal-dialog">

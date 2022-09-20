@@ -1,14 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="content-section justify-content-center text-center">
+    <div class="container text-center">
         <form method="POST" action=""> <!--the action is for redirecting the user somewhere after the form is sumbitted. But we take care of that from the backend, so i leave it empty here-->
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-2 pt-2 pb-2">Sign In</legend>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-
+                <legend class="my-3 display-5">Sign In</legend>
+                    {{ form.email.label(class="form-label") }}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-sm is-invalid") }}
                         <div class="invalid-feedback">
@@ -17,11 +14,9 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-sm text-center") }}
+                        {{ form.email(class="form-control form-control-sm text-center mb-3") }}
                     {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password.label(class="form-label") }}
                     {% if form.password.errors %}
                         {{ form.password(class="form-control form-control-sm is-invalid") }}
                         <div class="invalid-feedback">
@@ -30,10 +25,9 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-sm text-center") }}
+                        {{ form.password(class="form-control form-control-sm text-center mb-3") }}
                     {% endif %}
-                </div>
-                <div class="form-group">
+                <div class="my-2 text-center">
                    {% if form.recaptcha.errors %}
                        {{ form.recaptcha(class="form-control form-control-sm is-invalid") }}
                        <div class="invalid-feedback">
@@ -42,23 +36,25 @@
                            {% endfor %}
                        </div>
                    {% else %}
-                       {{ form.recaptcha(class="form-control form-control-sm") }}
+                         <div class="d-inline-block">
+                              {{ form.recaptcha() }}
+                         </div>
                    {% endif %}
                 </div>
-                <div class="form-check">
+                <div class="form-check text-center">
+                     <div class="d-inline-block">
+                          {{ form.remember(class="form-check-input") }}
+                     </div>
                      {{ form.remember.label(class="form-check-label") }}
-                     {{ form.remember(class="form-check-input") }}
                 </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
-            <small class="text-muted ml-1">
+
+                {{ form.submit(class="btn btn-outline-info my-3") }}
+            <div class="text-muted mb-3">
                  <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
-            </small>
+            </div>
         </form>
     </div>
-    <div class="border-top pt-2 pl-3">
+    <div class="container border-top bg-light py-3">
         <small class="text-muted">
             Don't Have An Account? <a class="ml-2" href="{{ url_for('register_page') }}">Sign Up Now</a>
         </small>
