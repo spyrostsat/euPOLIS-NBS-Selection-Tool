@@ -5,8 +5,8 @@
           <meta name="viewport" content="width=device-width, initial-scale=1">
 
           <!-- Bootstrap CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
           <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
           <link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico"/>
 
@@ -20,37 +20,57 @@
           {% block more_heading %}
           {% endblock %}
 
-          <!-- Optional JavaScript -->
-          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
      </head>
      <body>
-          <!-- Maybe the solution is to make the img tags behave as block elements and not the anchor tags as the img tag displays the images -->
-          <a target="_blank" href="https://eupolis-project.eu/"><img id="eupolis-img-container" src="../static/images/eupolis_logo.png" alt="Eupolis Logo" style="width:5%;"></a>
-          <a target="_blank" href="https://uwmh.eu/"><img id="uwmh-img-container" src="../static/images/uwmh_logo.jpg" alt="UWMH Logo" style="width:10%;"></a>
-          <a target="_blank" href="https://www.resilienceguard.ch/"><img id="rg-img-container" src="../static/images/rg_logo.jpg" alt="RG Logo" style="width:10%;"></a>
-
-          <ul class="nav-bar">
-               <li><a class="active" href="{{ url_for('home_page') }}">Home</a></li>
-               <li><a href="{{ url_for('nbs_page') }}">NBS Preliminary Selection Tool</a></li>
-               {% if current_user.is_authenticated %}
-               <li><a href="{{ url_for('account_page') }}">Account</a></li>
-               <li><a href="{{ url_for('logout_page') }}">Logout</a></li>
-               {% else %}
-                    <li><a href="{{ url_for('login_page') }}">Login</a></li>
-                    <li><a href="{{ url_for('register_page') }}">Register</a></li>
-               {% endif %}
-          </ul>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                 <a class="navbar-brand" target="_blank" href="https://eupolis-project.eu/">
+                      <img src="../static/images/eupolis_logo.png" alt="Eupolis Logo" width="80">
+                 </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link ms-5" aria-current="page" href="{{ url_for('home_page') }}">Home</a>
+                  </li>
+                  <li class="nav-item ms-2">
+                    <a class="nav-link" href="{{ url_for('nbs_page') }}">NBS Preliminary Selection Tool</a>
+                  </li>
+                  {% if current_user.is_authenticated %}
+                    <li class="nav-item ms-2">
+                         <a class="nav-link" href="{{ url_for('account_page') }}">Account</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                         <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
+                    </li>
+                  {% else %}
+                       <li class="nav-item ms-2">
+                            <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+                       </li>
+                       <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+                       </li>
+                  {% endif %}
+                </ul>
+                <div class="d-flex">
+                     <a class="navbar-brand" target="_blank" href="https://uwmh.eu/"><img src="../static/images/uwmh_logo.jpg" alt="UWMH Logo" width=160></a>
+                </div>
+                <div class="d-flex">
+                     <a class="navbar-brand" target="_blank" href="https://www.resilienceguard.ch/"><img src="../static/images/rg_logo.jpg" alt="RG Logo" width=160></a>
+                </div>
+              </div>
+            </div>
+          </nav>
 
           {% with messages = get_flashed_messages(with_categories=true) %}
                {% if messages %}
                     {% for category, message in messages %}
                          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                              <span>{{ message }}</span>
-                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                              </button>
                          </div>
                     {% endfor %}

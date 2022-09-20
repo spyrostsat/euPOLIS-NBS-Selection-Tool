@@ -37,13 +37,13 @@ def login_page():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            flash(f"Login successful, welcome {user.username}!", 'success')
+            flash(f"Login successful, welcome {user.username}!", 'info')
             if next_page:
                 return redirect(next_page)
             else:
                 return redirect(url_for('nbs_page'))
         else:
-            flash("Login unsuccessful, please check email and password.", 'danger')
+            flash("Login unsuccessful, please check email and password.", 'info')
     return render_template('login.html', title="Login", form=form)
 
 
@@ -104,7 +104,7 @@ def register_page():
             db.session.add(new_nbs_ci)
             db.session.commit()
 
-        flash(f'Your account has been created, you are now able to login!', 'success')
+        flash(f'Your account has been created, you are now able to login!', 'info')
         return redirect(url_for('login_page'))
     return render_template('register.html', title="Register", form=form)
 
@@ -112,7 +112,7 @@ def register_page():
 @app.route("/logout")
 def logout_page():
     logout_user()
-    flash(f'Logout successful!', 'success')
+    flash(f'Logout successful!', 'info')
     return redirect(url_for("home_page"))
 
 
@@ -124,7 +124,7 @@ def account_page():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit() # that's the only thing I need to do to update a column of a db in SQLAlchemy
-        flash(f'Your account has been updated!', 'success')
+        flash(f'Your account has been updated!', 'info')
         return redirect(url_for('account_page'))
     elif request.method == 'GET':
         form.username.data = current_user.username # When I load the account page the fields are already filled in with the current user's info
@@ -154,7 +154,7 @@ def delete_account():
     db.session.delete(current_user)
     db.session.commit()
 
-    flash('Your account has been deleted!', 'success')
+    flash('Your account has been deleted!', 'info')
     return redirect(url_for('home_page'))
 
 
@@ -202,7 +202,7 @@ def reset_token(token):
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password = hashed_password
         db.session.commit()
-        flash(f'Your password has been updated!', 'success')
+        flash(f'Your password has been updated!', 'info')
         return redirect(url_for('login_page'))
 
     return render_template('reset_token.html', title="Reset Password", form=form)
@@ -349,7 +349,7 @@ def add_concern():
         db.session.add(new_nbs_ci)
         db.session.commit()
 
-    flash(f"The new concern has been added!", "success")
+    flash(f"The new concern has been added!", "info")
     return redirect(url_for('nbs_page'))
 
 
@@ -372,7 +372,7 @@ def rename_concern():
             db.session.commit()
             break
 
-    flash(f"The concern has been renamed!", "success")
+    flash(f"The concern has been renamed!", "info")
     return redirect(url_for('nbs_page'))
 
 
@@ -402,7 +402,7 @@ def remove_concern():
         db.session.delete(concern_to_remove)
         db.session.commit()
 
-        flash(f"The concern has been removed!", "success")
+        flash(f"The concern has been removed!", "info")
         return redirect(url_for('nbs_page'))
 
 
@@ -431,7 +431,7 @@ def add_nbs():
         db.session.add(new_nbs_ci)
         db.session.commit()
 
-    flash(f"The new NBS has been added!", "success")
+    flash(f"The new NBS has been added!", "info")
     return redirect(url_for('nbs_page_2'))
 
 
@@ -455,7 +455,7 @@ def remove_nbs():
         db.session.delete(nbs_remove)
         db.session.commit()
 
-        flash(f"The requested NBS has been deleted!", "success")
+        flash(f"The requested NBS has been deleted!", "info")
         return redirect(url_for('nbs_page_2'))
 
 
@@ -470,7 +470,7 @@ def update_active_site():
             db.session.commit()
             break
 
-    flash(f"Active Site: {Site.query.filter_by(title=new_active_site_title).first().title}", "success")
+    flash(f"Active Site: {Site.query.filter_by(title=new_active_site_title).first().title}", "info")
     return redirect(url_for('nbs_page'))
 
 
@@ -491,7 +491,7 @@ def update_active_site_title(): # this code section updates the TITLE of the act
     current_user.site[current_user.active_site].title = new_title
     db.session.commit()
 
-    flash(f"The site's title has changed successfully!", 'success')
+    flash(f"The site's title has changed successfully!", 'info')
     return redirect(url_for('nbs_page'))
 
 
@@ -556,7 +556,7 @@ def create_new_site():
         db.session.commit()
 
     if all_info_added:
-        flash(f'The new site has been created!', 'success')
+        flash(f'The new site has been created!', 'info')
         for i in range(len(current_user.site)):
             if current_user.site[i].title == new_site_title:
                 current_user.active_site = i
@@ -597,7 +597,7 @@ def delete_site():
         db.session.delete(ci)
         db.session.commit()
 
-    flash(f"Site named: '{site.title}' is successfully deleted!", 'success')
+    flash(f"Site named: '{site.title}' is deleted!", 'info')
 
     db.session.delete(site)
     db.session.commit()
@@ -669,7 +669,7 @@ def update_nbs_data():
     if total_top_priorities > 3:
         flash(f"Please reduce the number of top priorities. (Maximum Top Priorities: 3)", "danger")
 
-    flash(f'Changes have been saved!', 'success')
+    flash(f'Changes have been saved!', 'info')
     load_page_down = True
 
     # return redirect(url_for('nbs_page'))
@@ -690,7 +690,7 @@ def update_nbs_data_2(): # this is to update the RATIOS AND NAMES of the NBS
         active_site.nbs[i].ratio = float(request.form.get(f"nbs_{i}_ratio"))
 
     db.session.commit()
-    flash(f'Changes have been saved!', 'success')
+    flash(f'Changes have been saved!', 'info')
     return redirect(url_for('nbs_page_2'))
 
 
@@ -757,7 +757,7 @@ def update_nbs_data_3():
             all_nbs_ci_ordered[i][j].impact = request.form.get(f"nbs_{j}_ci_{i}")
     db.session.commit()
 
-    flash(f'Changes have been saved!', 'success')
+    flash(f'Changes have been saved!', 'info')
     return render_template('nbs_tool_2.html', problems=problems, total_ci_counter=total_ci_counter, active_site=active_site,
                            total_nbs_counter=total_nbs_counter, nbs_cis=nbs_cis, load_page_down=json.dumps(load_page_down),
                            all_ci_ordered=all_ci_ordered, all_nbs_ci_ordered=all_nbs_ci_ordered)
@@ -971,7 +971,6 @@ def results_page():
         elif all_ci_ordered[i].importance == ci_importances[5]:
             ci_importance_without_na.append(0)
 
-    flash("Here are some details about the site's main concerns!", 'success')
     # full_problems will be used from js (that's why I need json) while problems will be used directly from html with jinja syntax
     return render_template('results.html', title="Results", total_ci_counter=total_ci_counter, actual_percentages=actual_percentages,
                            actual_max_percentages=actual_max_percentages, ci_importance_without_na=ci_importance_without_na,
@@ -1261,7 +1260,7 @@ def results_page_2():
             all_nbs_ci_ordered_impact_with_importances_traversed[i].append(all_nbs_ci_ordered_impact_with_importances[j][i])
 
     # WHEN I PASS DATA FROM FLASK TO BE USED DIRECTLY IN THE HTML THROUGH JINJA (NOT JS) I DON'T USE json.dumps()
-    flash("These are the final results!", "success")
+    flash("These are the final results!", "info")
     return render_template("results2.html", total_nbs_counter=total_nbs_counter, total_ci_counter=total_ci_counter,
                            ci_importance_without_na=ci_importance_without_na, problems=problems, full_problems=json.dumps(problems),
                            ci_importances=ci_importances, ci_tops=ci_tops, all_ci_ordered=all_ci_ordered,
@@ -1491,7 +1490,6 @@ def generatePdf1():
         elif all_ci_ordered[i].importance == ci_importances[5]:
             ci_importance_without_na.append(0)
 
-    flash("Here are some details about the site's main concerns!", 'success')
     # full_problems will be used from js (that's why I need json) while problems will be used directly from html with jinja syntax
     rendered = render_template('results_pdf.html', title="Results", total_ci_counter=total_ci_counter, actual_percentages=actual_percentages,
                            actual_max_percentages=actual_max_percentages, ci_importance_without_na=ci_importance_without_na,
@@ -1793,7 +1791,7 @@ def generatePdf2():
 
 
     # WHEN I PASS DATA FROM FLASK TO BE USED DIRECTLY IN THE HTML THROUGH JINJA (NOT JS) I DON'T USE json.dumps()
-    flash("These are the final results!", "success")
+    flash("These are the final results!", "info")
     rendered = render_template("results2_pdf.html", total_nbs_counter=total_nbs_counter, total_ci_counter=total_ci_counter,
                            ci_importance_without_na=ci_importance_without_na, problems=problems, full_problems=json.dumps(problems),
                            ci_importances=ci_importances, ci_tops=ci_tops, all_ci_ordered=all_ci_ordered,

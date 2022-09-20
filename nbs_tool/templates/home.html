@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="home-content-container">
-     <p class="text-center">Welcome to the EuPOLIS Nature-Based Solutions (NBS) Preliminary Selection Tool</p>
+     <p class="lead text-center mt-4">Welcome to the EuPOLIS Nature-Based Solutions (NBS) Preliminary Selection Tool</p>
 
-     <p style="font-size:1.2vw;">
+     <p style="font-size:1.2vw;" class="mx-3 text-center">
           Urban planners and engineers are increasingly adopting the Nature-Based Solution (NBS) paradigm to address contemporary
           challenges faced within urban areas in a sustainable manner. The EU-funded
           <a target="_blank" href="https://eupolis-project.eu/">euPOLIS project</a> aims to showcase that the deployment
@@ -14,7 +14,7 @@
           and structured manner. The project solutions and tools will be tested in a series of demonstration sites located in four
           European cities: Belgrade, Lodz, Piraeus, and Gladsaxe.
      </p>
-     <p style="font-size:1.2vw;">
+     <p style="font-size:1.2vw;" class="mx-3 text-center">
           As part of the aforementioned framework, a methodology was developed for assisting urban planners in the preliminary
           selection/prioritisation of possible NBS, from those that were initially considered for a particular urban site.
           The methodology explicitly accounts for the ability/efficiency of each NBS to mitigate the most important concerns of
@@ -24,17 +24,35 @@
           (<a target="_blank" href="https://uwmh.eu/">UWMH</a>) group) and
           <a target="_blank" href="https://www.resilienceguard.ch/">Resilience Guard GmbH</a>.
      </p>
-
-     <br>
-     <a id="get-started-link" href="{{ url_for('nbs_page') }}">Get Started</a>
+     <div class="justify-content-center text-center mt-4 mb-4">
+          <a href="{{ url_for('nbs_page') }}"><button type="button" class="btn btn-info btn-lg">Get Started<span><i class=" ms-3 bi bi-box-arrow-right"></i></span>
+</button></a>
+     </div>
 </div>
 
-<div class="text-center" style="width:33%; font-size:13px; margin-left:2.5vw; position:relative; bottom:0.8vw;">
-     <p style="font-size:20px; font-weight:bold;">euPOLIS Funding</p>
-     <a style="position:relative;bottom:10px;" target="_blank" href="https://european-union.europa.eu/index_en"><img src="../static/images/euro-union.png" alt="EU" style="width:9.5%;"></a>
-     <p>The euPOLIS project has received funding from the European Union’s Horizon 2020 Research & Innovation programme H2020-EU.3.5.2., under grant agreement No 869448</p>
-</div>
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<!-- <div class="container my-5"> -->
+    <footer style="background-color: #deded5;">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+             <div class="mb-3 mt-2 text-center" style="letter-spacing: 2px; color: #818963;">
+                  <a target="_blank" href="https://european-union.europa.eu/index_en"><img src="../static/images/euro-union.png" alt="EU" width=50></a>
+                  euPOLIS Funding
+             </div>
+          <div class="text-center">
+          </div>
+          <p class="mt-2" style="font-size:1vw;">The euPOLIS project has received funding from the European Union’s Horizon 2020 Research & Innovation programme H2020-EU.3.5.2., under grant agreement No 869448</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center lead py-2" style="background-color: rgba(0, 0, 0, 0.2); font-size:1.1vw;">
+         &copy; 2022 URBAN WATER MANAGEMENT AND HYRDROINFORMATICS GROUP & RESILIENCE GUARD
+    </div>
+    <!-- Copyright -->
+  </footer>
 
-<p id="copyright-text">&copy; 2022 URBAN WATER MANAGEMENT AND HYRDROINFORMATICS GROUP & RESILIENCE GUARD</p>
+<!-- </div> -->
+<!-- End of .container -->
 
 {% endblock content %}
