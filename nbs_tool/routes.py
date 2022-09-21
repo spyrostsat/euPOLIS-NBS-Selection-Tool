@@ -20,10 +20,21 @@ nbs_cis = ["None Chosen", "Direct Impact", "Indirect Impact", "No Impact"]
 
 load_page_down = False # just a variable to check whether i want to load the nbs_page on top or down (pixel wise)
 
+
 @app.route("/")
 @app.route("/home")
 def home_page():
     return render_template('home.html', title="Home")
+
+
+@app.route("/about")
+def about_page():
+    return render_template('about.html', title="About")
+
+
+@app.route("/contact")
+def contact_page():
+    return render_template('contact.html', title="Contact")
 
 
 @app.route("/login", methods=['GET', 'POST'])

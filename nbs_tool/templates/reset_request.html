@@ -1,27 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section text-center">
+    <div class="container text-center">
         <form method="POST" action=""> <!--the action is for redirecting the user somewhere after the form is sumbitted. But we take care of that from the backend, so i leave it empty here-->
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-2 pt-2 pb-2">Reset Password</legend>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-sm is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-sm") }}
-                    {% endif %}
+                <legend class="my-3 display-5">Reset Password</legend>
+                <div class="form-group row justify-content-center">
+                    <div class="col-md-9">
+                         {{ form.email.label(class="form-label") }}
+                         {% if form.email.errors %}
+                             {{ form.email(class="form-control form-control-sm is-invalid") }}
+                             <div class="invalid-feedback">
+                                 {% for error in form.email.errors %}
+                                     <span>{{ error }}</span>
+                                 {% endfor %}
+                             </div>
+                         {% else %}
+                             {{ form.email(class="form-control form-control-sm text-center mb-4") }}
+                         {% endif %}
+                    </div>
                </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
+               <div class="form-group row justify-content-center">
+                   <div class="col-md-9">
+                       {{ form.submit(class="btn btn-outline-info") }}
+                 </div>
+               </div>
         </form>
     </div>
 {% endblock content %}
