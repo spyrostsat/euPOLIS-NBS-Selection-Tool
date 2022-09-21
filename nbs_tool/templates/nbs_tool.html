@@ -5,55 +5,58 @@
 <div class="container text-center">
      <!-- CREATE NEW SITE SECTION -->
      <form action="{{ url_for('create_new_site') }}" method="POST">
-          <fieldset class="form-group">
-               <legend class="border-top h2 pt-3">Create New Site</legend>
-                    <div class="form-group">
-                         <input class="text-center form-control form-control-sm" type="text" name="site_title" size="40" placeholder="Type New Site's Name">
-                         <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Create Site">
-                    </div>
-          </fieldset>
+
+          <legend class="border-top h2 pt-3">Create New Site</legend>
+
+          <div class="form-group row justify-content-center">
+              <div class="col-md-7">
+                   <input class="text-center form-control form-control-sm" type="text" name="site_title" size="40" placeholder="Type New Site's Name">
+                   <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Create Site">
+              </div>
+         </div>
      </form>
 
      <!--DELETE SITE SECTION-->
      <form action="{{ url_for('delete_site') }}" method="POST">
-          <fieldset class="form-group">
-               <legend class="border-top h2 pt-3">Delete Existing Site</legend>
-                    <div class="form-group">
+          <legend class="h2 pt-3">Delete Existing Site</legend>
+               <div class="form-group row justify-content-center">
+                   <div class="col-md-7">
                          <select class="text-center form-control form-control-sm" name="all-sites">
-                              <option value="-1"> </option>
-                              {% for site in current_user.site %}
-                                   <option value="{{site.id}}">{{site.title}}</option>
-                              {% endfor %}
-                         </select>
-                         <button type="button" class="mt-2 mb-4 btn btn-outline-info btn-sm m-2 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Chosen Site</button>
+                         <option value="-1"> </option>
+                         {% for site in current_user.site %}
+                              <option value="{{site.id}}">{{site.title}}</option>
+                         {% endfor %}
+                    </select>
+                    <button type="button" class="mt-2 mb-4 btn btn-outline-info btn-sm m-2 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Chosen Site</button>
                     </div>
-          </fieldset>
-          <!-- Delete Modal -->
-          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-          <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete this site?</h5>
-             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-             </button>
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-               <input class="btn btn-danger" type="submit" value="Delete Site">
-           </div>
-          </div>
-          </div>
-          </div>
+               </div>
      </form>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+   <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete this site?</h5>
+   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+   </button>
+ </div>
+ <div class="modal-footer">
+   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+     <input class="btn btn-danger" type="submit" value="Delete Site">
+ </div>
+</div>
+</div>
 </div>
 
 <!-- ALL SITES SECTION -->
 <div class="container text-center">
      <form action="{{ url_for('update_active_site') }}" method="POST">
-          <fieldset class="form-group">
                <legend class="h2">Select Active Site</legend>
-                    <div class="form-group">
-                         <select class="text-center form-control form-control-sm" name="all-sites">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-md-7">
+                              <select class="text-center form-control form-control-sm" name="all-sites">
                               {% for site in current_user.site %}
                                    <option value="{{site.title}}"
                                    {% if site.title==active_site.title %}
@@ -63,10 +66,10 @@
                                    {{site.title}}
                                    </option>
                               {% endfor %}
-                         </select>
-                         <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Set Active Site">
+                              </select>
+                              <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Set Active Site">
+                         </div>
                     </div>
-          </fieldset>
      </form>
 </div>
 
@@ -93,18 +96,17 @@
 </div>
 
 <!-- HERE WE DECLARE THE NAME OF THE ACTIVE SITE JUST TO MAKE IT CLEAR -->
-<div class="container text-center border-top">
-     <div class="fs-1 fw-bold mt-4">
+<div class="container text-center border-top border-4">
+     <div class="fs-2 fw-bold mt-4">
           Active Site: {{ active_site.title }}
-     </div>
-     <div class="text-center">
-          <button type="button" class="btn btn-outline-info btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Change Active Site's Title</button>
+          <button type="button" class="btn btn-outline-info btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Modify Title</button>
      </div>
 
+
      <form class="" action="{{ url_for('update_nbs_data') }}" method="POST">
-          <div class="table-responsive container text-center" style="font-size: 14px;">
+          <div class="table-responsive container text-center mt-4" style="font-size: 14px;">
                <table id="my-table" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns Assessment</caption>
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns Assessment</caption>
                     <thead class="thead-dark">
                     <tr>
                           <th scope="col" class="align-middle">#</th>
@@ -157,6 +159,7 @@
                </table>
           </div>
      </form>
+
      <div class="container">
        <div class="row align-items-center">
          <div class="col">
@@ -251,7 +254,7 @@
 </div>
 
 <div class="text-center mb-3">
-     <a class="my-5 btn btn-info btn-md fs-3" href="{{ url_for('results_page') }}">View Concerns Assessment</a>
+     <a class="my-5 btn btn-outline-info btn-md fs-5" href="{{ url_for('results_page') }}">View Concerns Assessment</a>
 </div>
 
 <script type="text/javascript">

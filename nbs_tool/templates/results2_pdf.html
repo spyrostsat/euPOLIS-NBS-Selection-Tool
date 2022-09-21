@@ -5,8 +5,8 @@
           <meta name="viewport" content="width=device-width, initial-scale=1">
 
           <!-- Bootstrap CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
           <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
           <link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico"/>
 
@@ -16,26 +16,27 @@
                <title>euPOLIS NBS Preliminary Selection Tool</title>
           {% endif %}
 
-          <!-- Optional JavaScript -->
-          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <!-- Just in case i want more css libraries in some html pages -->
+          {% block more_heading %}
+          {% endblock %}
+
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
      </head>
      <body>
-          <div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+
+          <div class="text-center my-4 fw-bold fs-2" style="font-size: 30px;">
                {{ active_site.title }}
           </div>
 
-          <div class="table-responsive content-section text-center" style="font-size: 11px;">
-               <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
-                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
-                    <thead>
+          <div class="table-responsive container text-center" style="font-size: 14px;">
+               <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
+                    <thead class="thead-dark">
                     <tr>
                      <th scope="col" class="align-middle">#</th>
                      <th scope="col" class="align-middle">Concern</th>
                      {% for i in range(total_nbs_counter) %}
-                          <th scope="col" class="align-middle">{{ nbs_names[i] }}</th>
+                          <th scope="col" class="align-middle">{{ nbs_names_html[i] }}</th>
                      {% endfor %}
                     </tr>
                     </thead>
@@ -55,10 +56,10 @@
                </table>
           </div>
 
-          <div class="table-responsive content-section text-center" style="font-size: 11px;">
-               <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
-                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Overall Performance</caption>
-                    <thead>
+          <div class="table-responsive container text-center my-4" style="font-size: 14px;">
+               <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">NBS Overall Performance</caption>
+                    <thead class="thead-dark">
                          <tr>
                               <th scope="col" class="align-middle">Scores</th>
                               {% for i in range(1, total_nbs_counter+1) %}
@@ -121,14 +122,14 @@
           </div>
 
 
-          <div class="table-responsive content-section text-center" style="font-size: 11px;">
-               <table id="top-priority-table" class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
+          <div class="table-responsive container text-center my-4" style="font-size: 14px;">
+               <table id="top-priority-table" class="table table-hover table-bordered table-light table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
                     {% if top_counter == 0 %}
-                         <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
+                         <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
                     {% else %}
-                         <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
+                         <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
                     {% endif %}
-                    <thead>
+                    <thead class="thead-dark">
                          <tr>
                               <th scope="col" class="align-middle">NBS (Descending Order)</th>
                               <th scope="col" class="align-middle">NBS Overall Score</th>
@@ -156,16 +157,15 @@
                </table>
           </div>
 
-
           <div class="table-responsive text-center" style="font-size: 11px;">
                <table class="table table-hover table-bordered table-info table-sm" border="1" style="width:98%; border:2px solid #000000; border-collapse:collapse">
-                    <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performances Against Every Main Concern</caption>
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">NBS Performances Against Every Main Concern</caption>
                     <thead>
                     <tr>
                      <th scope="col" class="align-middle">#</th>
                      <th scope="col" class="align-middle">Concern</th>
                      {% for i in range(total_nbs_counter) %}
-                          <th scope="col" class="align-middle">{{ nbs_names[i] }}</th>
+                          <th scope="col" class="align-middle">{{ nbs_names_html[i] }}</th>
                      {% endfor %}
                     </tr>
                     </thead>

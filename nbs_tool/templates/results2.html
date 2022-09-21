@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+
+<div class="text-center my-4 fw-bold fs-2">
      {{ active_site.title }}
 </div>
 
-<div class="table-responsive content-section text-center" style="font-size: 16px;">
-     <table class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
+<div class="table-responsive container text-center" style="font-size: 14px;">
+     <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Impacts Against Every Main Concern</caption>
           <thead class="thead-dark">
           <tr>
            <th scope="col" class="align-middle">#</th>
@@ -37,9 +38,9 @@
      </table>
 </div>
 
-<div class="table-responsive content-section text-center" style="font-size: 16px;">
-     <table class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Overall Performance</caption>
+<div class="table-responsive container text-center my-4" style="font-size: 14px;">
+     <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+          <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Overall Performance</caption>
           <thead class="thead-dark">
                <tr>
                     <th scope="col" class="align-middle">Scores</th>
@@ -103,12 +104,12 @@
 </div>
 
 
-<div class="table-responsive content-section text-center" style="font-size: 16px;">
-     <table id="top-priority-table" class="table table-hover table-bordered table-info table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+<div class="table-responsive container text-center my-4" style="font-size: 14px;">
+     <table id="top-priority-table" class="table table-hover table-bordered table-light table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
           {% if top_counter == 0 %}
-               <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
+               <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
           {% else %}
-               <caption class="pt-4" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
+               <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">NBS Performance Against Top Priorities</caption>
           {% endif %}
           <thead class="thead-dark">
                <tr>
@@ -139,35 +140,44 @@
 </div>
 
 <!-- GRAPH 1 - Overall Scores of all NBS -->
-<div style="width:65vw; margin:auto;" class="mt-4">
-     <canvas id="chart1"></canvas>
-     <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart1')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+<div class="container mt-5">
+  <div class="row justify-content-center align-items-center">
+       <div class="col col-lg-10">
+            <canvas id="chart1"></canvas>
+            <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id='chart1')"><i class="fa fa-save" style="font-size:20px;"></i></button>
+       </div>
+ </div>
 </div>
 
-{% for i in range(total_nbs_counter) %}
-     <!-- RADAR CHART -->
-     <div style="display:inline-block; width:35vw;" class="mt-4 pl-3">
-          <canvas id="chart{{i}}-1"></canvas>
-          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-1`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
-     </div>
 
-     <!-- BAR CHART -->
-     <div style="display:inline-block; width:60vw;">
-          <canvas id="chart{{i}}-2"></canvas>
-          <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-2`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
+<!-- ALL OTHER GRAPHS -->
+{% for i in range(total_nbs_counter) %}
+     <div class="container mt-4">
+      <div class="row justify-content-center align-items-center">
+         <div class="col col-lg-4">
+              <canvas id="chart{{i}}-1"></canvas>
+              <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-1`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
+         </div>
+         <div class="col col-lg-8">
+              <canvas id="chart{{i}}-2"></canvas>
+              <button title="Download Chart as Image" type="button" class="my-buttons-graphs-img mt-1 ml-4" style="font-size:12px;" name="button" onclick="downloadChartAsImage(canvas_id=`chart{{i}}-2`)"><i class="fa fa-save" style="font-size:20px;"></i></button>
+         </div>
+      </div>
      </div>
 {% endfor %}
 
-
 <!-- FINAL BUTTONS AT THE BOTTOM OF THE PAGE -->
-<div class="text-center mb-4 pb-4 mt-4 pt-4">
-     <!-- <a class="btn btn-primary btn-lg mr-4" href="#">Download PDF Report</a> -->
-     <form class="mb-4" action="{{ url_for('generatePdf2') }}" method="POST">
-          <input class="btn btn-primary btn-lg mt-4" type="submit" value="Download Final NBS Report">
-          <br>
-          <br>
-          <a class="mt-4 btn btn-primary btn-lg" href="{{ url_for('nbs_page_2') }}">Back To Configurations</a>
-     </form>
+<div class="container my-5">
+  <div class="row justify-content-evenly">
+    <div class="col">
+         <a class="my-4 btn btn-outline-info fs-5" href="{{ url_for('nbs_page_2') }}">Back (NBS Configurations)</a>
+    </div>
+    <div class="col align-self-center">
+         <form class="my-4 text-center" action="{{ url_for('generatePdf2') }}" method="POST">
+              <input class="btn btn-outline-info fs-5" type="submit" value="Download Report">
+         </form>
+    </div>
+  </div>
 </div>
 
 

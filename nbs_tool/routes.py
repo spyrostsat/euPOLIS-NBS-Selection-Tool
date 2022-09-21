@@ -37,7 +37,7 @@ def login_page():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            flash(f"Login successful, welcome {user.username}!", 'info')
+            flash(f"You are logged in, welcome {user.username}!", 'info')
             if next_page:
                 return redirect(next_page)
             else:
@@ -112,7 +112,7 @@ def register_page():
 @app.route("/logout")
 def logout_page():
     logout_user()
-    flash(f'Logout successful!', 'info')
+    flash(f'You have been logged out!', 'info')
     return redirect(url_for("home_page"))
 
 
@@ -491,7 +491,7 @@ def update_active_site_title(): # this code section updates the TITLE of the act
     current_user.site[current_user.active_site].title = new_title
     db.session.commit()
 
-    flash(f"The site's title has changed successfully!", 'info')
+    flash(f"The site's title has changed!", 'info')
     return redirect(url_for('nbs_page'))
 
 
@@ -1260,7 +1260,7 @@ def results_page_2():
             all_nbs_ci_ordered_impact_with_importances_traversed[i].append(all_nbs_ci_ordered_impact_with_importances[j][i])
 
     # WHEN I PASS DATA FROM FLASK TO BE USED DIRECTLY IN THE HTML THROUGH JINJA (NOT JS) I DON'T USE json.dumps()
-    flash("These are the final results!", "info")
+
     return render_template("results2.html", total_nbs_counter=total_nbs_counter, total_ci_counter=total_ci_counter,
                            ci_importance_without_na=ci_importance_without_na, problems=problems, full_problems=json.dumps(problems),
                            ci_importances=ci_importances, ci_tops=ci_tops, all_ci_ordered=all_ci_ordered,
@@ -1791,14 +1791,14 @@ def generatePdf2():
 
 
     # WHEN I PASS DATA FROM FLASK TO BE USED DIRECTLY IN THE HTML THROUGH JINJA (NOT JS) I DON'T USE json.dumps()
-    flash("These are the final results!", "info")
+
     rendered = render_template("results2_pdf.html", total_nbs_counter=total_nbs_counter, total_ci_counter=total_ci_counter,
                            ci_importance_without_na=ci_importance_without_na, problems=problems, full_problems=json.dumps(problems),
                            ci_importances=ci_importances, ci_tops=ci_tops, all_ci_ordered=all_ci_ordered,
                            final_scores=final_scores, active_site=active_site, all_nbs_ordered=all_nbs_ordered,
                            nbs_descending_order=nbs_descending_order, overall_scores_descending_order=overall_scores_descending_order,
                            nbs_descending_order_against_top=nbs_descending_order_against_top, top_counter=top_counter,
-                           overall_scores=json.dumps(overall_scores), nbs_names=nbs_names,
+                           overall_scores=json.dumps(overall_scores), nbs_names_html=nbs_names,
                            best_solution_index=best_solution_index, problems_names=json.dumps(problems_names),
                            all_nbs_ci_ordered=all_nbs_ci_ordered,
                            all_nbs_ci_ordered_impact_with_importances=all_nbs_ci_ordered_impact_with_importances)

@@ -6,13 +6,13 @@
 
 {% block content %}
 
-<div class="text-center mt-4 fw-bold display-5">
+<div class="text-center my-4 fw-bold fs-2">
      {{ active_site.title }}
 </div>
 
 <div class="table-responsive container text-center" style="font-size: 14px;">
      <table id="table-1" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-     <caption class="" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns - Baseline Assessment</caption>
+     <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns - Baseline Assessment</caption>
      <thead class="thead-dark">
           <tr>
            <th scope="col" class="align-middle text-center">#</th>
@@ -104,18 +104,18 @@
  </div>
 </div>
 
-<div class="container">
+<div class="container mt-5">
   <div class="row justify-content-evenly">
     <div class="col">
-         <a class="my-4 btn btn-info" href="{{ url_for('nbs_page') }}">Back (Concerns Configurations)</a>
+         <a class="my-4 btn btn-outline-info fs-5" href="{{ url_for('nbs_page') }}">Back (Concerns Configurations)</a>
     </div>
     <div class="col align-self-center">
          <form class="my-4 text-center" action="{{ url_for('generatePdf1') }}" method="POST">
-              <input class="btn btn-info" type="submit" value="Download Report">
+              <input class="btn btn-outline-info fs-5" type="submit" value="Download Report">
          </form>
     </div>
     <div class="col">
-         <a class="my-4 btn btn-info" href="{{ url_for('nbs_page_2') }}">Proceed (NBS Configurations)</a>
+         <a class="my-4 btn btn-outline-info fs-5" href="{{ url_for('nbs_page_2') }}">Proceed (NBS Configurations)</a>
     </div>
   </div>
 </div>

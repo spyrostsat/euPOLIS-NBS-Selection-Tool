@@ -78,7 +78,33 @@
           {% endwith %}
 
           {% block content %}
+
           {% endblock %}
+
+          <!-- Remove the container if you want to extend the Footer to full width. -->
+          <!-- <div class="container my-5"> -->
+              <footer style="background-color: #deded5;">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                       <div class="mb-3 mt-2 text-center" style="letter-spacing: 2px; color: #818963;">
+                            <a target="_blank" href="https://european-union.europa.eu/index_en"><img src="../static/images/euro-union.png" alt="EU" width=50></a>
+                            euPOLIS Funding
+                       </div>
+                    <div class="text-center">
+                    </div>
+                    <p class="mt-2" style="font-size:1vw;">The euPOLIS project has received funding from the European Union’s Horizon 2020 Research & Innovation programme H2020-EU.3.5.2., under grant agreement No 869448</p>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center lead py-2" style="background-color: rgba(0, 0, 0, 0.2); font-size:1.1vw;">
+                   &copy; 2022 URBAN WATER MANAGEMENT AND HYRDROINFORMATICS GROUP & RESILIENCE GUARD
+              </div>
+              <!-- Copyright -->
+            </footer>
+
+          <!-- </div> -->
+          <!-- End of .container -->
 
      </body>
 </html>

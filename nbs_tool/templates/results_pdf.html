@@ -5,8 +5,8 @@
           <meta name="viewport" content="width=device-width, initial-scale=1">
 
           <!-- Bootstrap CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
           <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
           <link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico"/>
 
@@ -16,21 +16,21 @@
                <title>euPOLIS NBS Preliminary Selection Tool</title>
           {% endif %}
 
-          <!-- Optional JavaScript -->
-          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <!-- Just in case i want more css libraries in some html pages -->
+          {% block more_heading %}
+          {% endblock %}
+
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
      </head>
      <body>
-          <div class="text-center mt-4" style="font-size:50px; font-weight:bold;">
+          <div class="text-center mt-4 fw-bold" style="font-size: 30px;">
                {{ active_site.title }}
           </div>
 
-          <div id="my-container">
-               <table id="table-1" style="width:90%; margin:auto; font-size:11px;" class="table table-hover table-bordered table-info table-sm mt-1" border="1" style="border:2px solid #000000; border-collapse:collapse">
-               <caption class="" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns - Baseline Assessment</caption>
-               <thead>
+          <div class="table-responsive container text-center" style="font-size: 14px;">
+               <table id="table-1" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+               <caption class="" style="caption-side:top; text-align:center; color:#000000; font-size:24px; font-weight:bold;">Site's Main Concerns - Baseline Assessment</caption>
+               <thead class="thead-dark">
                     <tr>
                      <th scope="col" class="align-middle text-center">#</th>
                      <th scope="col" class="align-middle text-center">Category</th>
@@ -64,15 +64,16 @@
                  </tbody>
                </table>
                <br>
-               <table id="table-2" style="width:90%; margin:auto; font-size:11px;" class="table table-hover table-bordered table-info table-sm mt-4" border="1" style="border:2px solid #000000; border-collapse:collapse">
-                    <thead>
+
+               <table id="table-2" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <thead class="thead-dark">
                     <tr>
                     <th scope="col" class="align-middle text-center"></th>
                      <th scope="col" class="align-middle text-center">Urban</th>
                      <th scope="col" class="align-middle text-center">Environmental</th>
                      <th scope="col" class="align-middle text-center">Social</th>
                      <th scope="col" class="align-middle text-center">Economic</th>
-                     <th scope="col" class="align-middle text-center">PH % WB</th>
+                     <th scope="col" class="align-middle text-center">PH & WB</th>
                      <th scope="col" class="align-middle text-center">Overall</th>
                     </tr>
                     </thead>
