@@ -17,7 +17,7 @@
                          {{ form.username.label(class="form-label text-muted") }}
 
                          {% if form.username.errors %}
-                             {{ form.username(class="form-control form-control-sm is-invalid") }}
+                             {{ form.username(class="form-control form-control-sm is-invalid text-center") }}
                              <div class="invalid-feedback">
                                  {% for error in form.username.errors %}
                                      <span>{{ error }}</span>
@@ -33,7 +33,7 @@
                    <div class="col-md-7">
                          {{ form.email.label(class="form-label text-muted") }}
                          {% if form.email.errors %}
-                             {{ form.email(class="form-control form-control-lg sm-invalid") }}
+                             {{ form.email(class="form-control form-control-sm is-invalid text-center") }}
                              <div class="invalid-feedback">
                                  {% for error in form.email.errors %}
                                      <span>{{ error }}</span>
@@ -44,7 +44,7 @@
                          {% endif %}
                     </div>
                </div>
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.submit(class="btn btn-outline-info mt-3") }}
        </form>
        <button type="button" class="btn btn-danger btn-md mt-5 mb-5" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
  </div>

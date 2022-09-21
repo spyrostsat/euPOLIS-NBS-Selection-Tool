@@ -104,7 +104,7 @@ def register_page():
             db.session.add(new_nbs_ci)
             db.session.commit()
 
-        flash(f'Your account has been created, you are now able to login!', 'info')
+        flash(f'Your account has been created. Please login to access the NBS Tool!', 'info')
         return redirect(url_for('login_page'))
     return render_template('register.html', title="Register", form=form)
 
