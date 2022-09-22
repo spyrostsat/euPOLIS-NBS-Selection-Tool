@@ -185,16 +185,16 @@
           </div>
           <div class="modal-footer">
              <form action="{{ url_for('add_concern')}}" method="POST">
-                  <select name="concern_category" style="font-size:22px;">
+                  <select name="concern_category" style="font-size:16px;">
                          <option value="Urban">Urban</option>
                          <option value="Environmental">Environmental</option>
                          <option value="Social">Social</option>
                          <option value="Economic/Business">Economic/Business</option>
                          <option value="PH & WB (Public Health & Well Being)">PH & WB (Public Health & Well Being)</option>
                   </select>
-                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_name" size="100" placeholder="New Concern's Name">
-                  <button type="button" class="mt-4 btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-4" type="submit" value="Add Concern">
+                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_name" size="60" placeholder="New Concern's Name">
+                  <button type="button" class="mt-4 btn btn-info mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Add Concern">
              </form>
           </div>
           </div>
@@ -213,14 +213,14 @@
           </div>
           <div class="modal-footer">
              <form action="{{ url_for('rename_concern')}}" method="POST">
-                  <select name="concern_to_rename" style="font-size:16px;">
+                  <select name="concern_to_rename" style="font-size:14px;">
                        {% for concern in all_ci_ordered %}
                             <option value="{{ concern.title }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
-                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_new_name" size="100" placeholder="Concern's New Name">
-                  <button type="button" class="btn btn-info mt-3" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-3" type="submit" value="Rename Concern">
+                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_new_name" size="40" placeholder="Concern's New Name">
+                  <button type="button" class="btn btn-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Rename Concern">
              </form>
           </div>
           </div>
@@ -238,13 +238,14 @@
           </div>
           <div class="modal-footer">
              <form action="{{ url_for('remove_concern')}}" method="POST">
-                  <select name="concern_to_remove" style="font-size:16px;">
+                  <select name="concern_to_remove" style="font-size:14px;">
                        {% for concern in all_ci_ordered %}
                             <option value="{{ concern.id }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
-                  <button type="button" class="btn btn-info mt-3" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-3" type="submit" value="Remove Concern">
+                  <br>
+                  <button type="button" class="btn btn-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Remove Concern">
              </form>
           </div>
           </div>
