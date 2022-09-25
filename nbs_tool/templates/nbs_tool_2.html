@@ -99,8 +99,8 @@
 
 
 <div class="text-center">
-     <button type="button" class="btn btn-light btn-md mx-3" data-bs-toggle="modal" data-bs-target="#addModal">Add a new NBS</button>
-     <button type="button" class="btn btn-light btn-md mx-3" data-bs-toggle="modal" data-bs-target="#removeModal">Remove an existing NBS</button>
+     <button type="button" class="btn btn-outline-info btn-md mx-3" data-bs-toggle="modal" data-bs-target="#addModal">Add a new NBS</button>
+     <button type="button" class="btn btn-outline-info btn-md mx-3" data-bs-toggle="modal" data-bs-target="#removeModal">Remove an existing NBS</button>
 </div>
 
 <!-- Add Modal -->
@@ -116,8 +116,8 @@
         <form action="{{ url_for('add_nbs')}}" method="POST">
              <input class="text-center form-control form-control-sm" style="font-size:14px;" type="text" required name="nbs_name" size="60" placeholder="New NBS Name">
              <br>
-             <button type="button" class="btn btn-info mx-5" data-bs-dismiss="modal">Cancel</button>
-             <input class="btn btn-info ms-5" type="submit" value="Add NBS">
+             <button type="button" class="btn btn-outline-info mx-5" data-bs-dismiss="modal">Cancel</button>
+             <input class="btn btn-outline-info ms-5" type="submit" value="Add NBS">
         </form>
      </div>
      </div>
@@ -135,15 +135,15 @@
      </div>
      <div class="modal-footer">
         <form action="{{ url_for('remove_nbs')}}" method="POST">
-             <select name="nbs_to_remove" style="font-size:20px;">
+             <select name="nbs_to_remove" style="font-size:25px;">
                   {% for nbs in active_site.nbs %}
                        <option value="{{ nbs.id }}">{{ nbs.title }}</option>
                   {% endfor %}
              </select>
              <br>
              <br>
-             <button type="button" class="btn btn-info mx-5" data-bs-dismiss="modal">Cancel</button>
-             <input class="btn btn-info" type="submit" value="Remove NBS">
+             <button type="button" class="btn btn-outline-info mx-5" data-bs-dismiss="modal">Cancel</button>
+             <input class="btn btn-outline-info" type="submit" value="Remove NBS">
         </form>
      </div>
      </div>

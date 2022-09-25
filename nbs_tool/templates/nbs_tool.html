@@ -9,7 +9,7 @@
           <legend class="border-top h2 pt-3">Create New Site</legend>
 
           <div class="form-group row justify-content-center">
-              <div class="col-md-7">
+              <div class="col-12 col-md-8 col-lg-5">
                    <input class="text-center form-control form-control-sm" type="text" name="site_title" size="40" placeholder="Type New Site's Name">
                    <input class="mt-2 mb-4 btn btn-outline-info btn-sm" type="submit" value="Create Site">
               </div>
@@ -20,7 +20,7 @@
      <form action="{{ url_for('delete_site') }}" method="POST">
           <legend class="h2 pt-3">Delete Existing Site</legend>
                <div class="form-group row justify-content-center">
-                   <div class="col-md-7">
+                   <div class="col-12 col-md-8 col-lg-5">
                          <select class="text-center form-control form-control-sm" name="all-sites">
                          <option value="-1"> </option>
                          {% for site in current_user.site %}
@@ -55,7 +55,7 @@
      <form action="{{ url_for('update_active_site') }}" method="POST">
                <legend class="h2">Select Active Site</legend>
                     <div class="form-group row justify-content-center">
-                        <div class="col-md-7">
+                        <div class="col-12 col-md-8 col-lg-5">
                               <select class="text-center form-control form-control-sm" name="all-sites">
                               {% for site in current_user.site %}
                                    <option value="{{site.title}}"
@@ -192,9 +192,9 @@
                          <option value="Economic/Business">Economic/Business</option>
                          <option value="PH & WB (Public Health & Well Being)">PH & WB (Public Health & Well Being)</option>
                   </select>
-                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_name" size="60" placeholder="New Concern's Name">
-                  <button type="button" class="mt-4 btn btn-info mx-4" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Add Concern">
+                  <input class="text-center form-control form-control-md mt-3" type="text" required name="concern_name" size="60" placeholder="New Concern's Name">
+                  <button type="button" class="mt-4 btn btn-outline-info mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-outline-info mt-4 ms-4" type="submit" value="Add Concern">
              </form>
           </div>
           </div>
@@ -218,9 +218,9 @@
                             <option value="{{ concern.title }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
-                  <input class="text-center form-control form-control-lg mt-3" type="text" required name="concern_new_name" size="40" placeholder="Concern's New Name">
-                  <button type="button" class="btn btn-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Rename Concern">
+                  <input class="text-center form-control form-control-md mt-3" type="text" required name="concern_new_name" size="60" placeholder="Concern's New Name">
+                  <button type="button" class="btn btn-outline-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-outline-info mt-4 ms-4" type="submit" value="Rename Concern">
              </form>
           </div>
           </div>
@@ -238,14 +238,14 @@
           </div>
           <div class="modal-footer">
              <form action="{{ url_for('remove_concern')}}" method="POST">
-                  <select name="concern_to_remove" style="font-size:14px;">
+                  <select name="concern_to_remove" style="font-size:22px;">
                        {% for concern in all_ci_ordered %}
                             <option value="{{ concern.id }}">{{ concern.title }}</option>
                        {% endfor %}
                   </select>
                   <br>
-                  <button type="button" class="btn btn-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
-                  <input class="btn btn-info mt-4 ms-4" type="submit" value="Remove Concern">
+                  <button type="button" class="btn btn-outline-info mt-4 mx-4" data-bs-dismiss="modal">Cancel</button>
+                  <input class="btn btn-outline-info mt-4 ms-4" type="submit" value="Remove Concern">
              </form>
           </div>
           </div>
