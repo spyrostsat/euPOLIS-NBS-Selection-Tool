@@ -2,15 +2,16 @@
 
 {% block content %}
 
-<div class="container text-center">
-     <div class="fs-2 fw-bold my-4">
+<div class="container my-4">
+     <div class="text-center my-4 lead" style="font-size: 36px;">
           {{ active_site.title }}
      </div>
+</div>
 
 <form action="{{ url_for('update_nbs_data_2') }}" method="POST">
      <div class="table-responsive container text-center" style="font-size: 14px;">
           <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-               <caption class="pt-1 text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Nature-Based Solutions (NBS) Titles and Application Ratios</caption>
+               <caption class="pt-1 text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Nature-Based Solutions (NBS) Titles and Application Ratios</caption>
                <thead class="thead-dark">
                <tr>
                <th scope="col" class="align-middle"> </th>
@@ -49,7 +50,7 @@
 <form class="" action="{{ url_for('update_nbs_data_3') }}" method="POST">
      <div class="table-responsive container text-center mt-4" style="font-size: 14px;">
           <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-               <caption class="pt-2 text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Nature-Based Solutions Efficiency</caption>
+               <caption class="pt-2 text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Nature-Based Solutions Efficiency</caption>
                <thead class="thead-dark">
                <tr>
                 <th scope="col" class="align-middle">#</th>

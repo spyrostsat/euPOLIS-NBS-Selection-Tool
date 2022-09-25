@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container text-center my-5">
+    <div class="container text-center my-4">
         <form method="POST" action=""> <!--the action is for redirecting the user somewhere after the form is sumbitted. But we take care of that from the backend, so i leave it empty here-->
             {{ form.hidden_tag() }}
-                <legend class="mt-5 mb-3 display-5">Reset Password</legend>
+                <legend class="mt-4 mb-3 lead" style="font-size: 32px;">Reset Password</legend>
                 <div class="form-group row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-5">
                          {{ form.email.label(class="form-label") }}

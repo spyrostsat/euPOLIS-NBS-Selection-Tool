@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="container text-center">
+    <div class="container text-center my-4">
         <form method="POST" action=""> <!--the action is for redirecting the user somewhere after the form is sumbitted. But we take care of that from the backend, so i leave it empty here-->
             {{ form.hidden_tag() }}
-                <legend class="my-3 display-5">Create Account</legend>
+                <legend style="font-size: 32px;" class="lead my-4">Create Account</legend>
 
                 <div class="form-group row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-5">

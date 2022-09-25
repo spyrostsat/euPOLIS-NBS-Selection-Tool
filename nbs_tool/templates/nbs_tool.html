@@ -6,7 +6,7 @@
      <!-- CREATE NEW SITE SECTION -->
      <form action="{{ url_for('create_new_site') }}" method="POST">
 
-          <legend class="border-top h2 pt-3">Create New Site</legend>
+          <legend class="border-top pt-3 lead" style="font-size: 32px;">Create New Site</legend>
 
           <div class="form-group row justify-content-center">
               <div class="col-12 col-md-8 col-lg-5">
@@ -18,7 +18,7 @@
 
      <!--DELETE SITE SECTION-->
      <form action="{{ url_for('delete_site') }}" method="POST">
-          <legend class="h2 pt-3">Delete Existing Site</legend>
+          <legend class="pt-3 lead" style="font-size: 32px;">Delete Existing Site</legend>
                <div class="form-group row justify-content-center">
                    <div class="col-12 col-md-8 col-lg-5">
                          <select class="text-center form-control form-control-sm" name="all-sites">
@@ -53,7 +53,7 @@
 <!-- ALL SITES SECTION -->
 <div class="container text-center">
      <form action="{{ url_for('update_active_site') }}" method="POST">
-               <legend class="h2">Select Active Site</legend>
+               <legend class="lead" style="font-size: 32px;">Select Active Site</legend>
                     <div class="form-group row justify-content-center">
                         <div class="col-12 col-md-8 col-lg-5">
                               <select class="text-center form-control form-control-sm" name="all-sites">
@@ -97,7 +97,7 @@
 
 <!-- HERE WE DECLARE THE NAME OF THE ACTIVE SITE JUST TO MAKE IT CLEAR -->
 <div class="container text-center border-top border-4">
-     <div class="fs-2 fw-bold mt-4">
+     <div class="lead mt-4" style="font-size: 36px;">
           Active Site: {{ active_site.title }}
           <button type="button" class="btn btn-outline-info btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Modify Title</button>
      </div>
@@ -106,7 +106,7 @@
      <form class="" action="{{ url_for('update_nbs_data') }}" method="POST">
           <div class="table-responsive container text-center mt-4" style="font-size: 14px;">
                <table id="my-table" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px; font-weight:bold;">Site's Main Concerns Assessment</caption>
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Site's Main Concerns Assessment</caption>
                     <thead class="thead-dark">
                     <tr>
                           <th scope="col" class="align-middle">#</th>
