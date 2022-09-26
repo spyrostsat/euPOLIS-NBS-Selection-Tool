@@ -118,7 +118,7 @@
              <input class="text-center form-control form-control-sm" style="font-size:14px;" type="text" required name="nbs_name" size="60" placeholder="New NBS Name">
              <br>
              <button type="button" class="btn btn-outline-info mx-5" data-bs-dismiss="modal">Cancel</button>
-             <input class="btn btn-outline-info ms-5" type="submit" value="Add NBS">
+             <input class="btn btn-outline-info mx-5" type="submit" value="Add NBS">
         </form>
      </div>
      </div>
@@ -136,7 +136,7 @@
      </div>
      <div class="modal-footer">
         <form action="{{ url_for('remove_nbs')}}" method="POST">
-             <select name="nbs_to_remove" style="font-size:25px;">
+             <select name="nbs_to_remove" style="font-size:20px;">
                   {% for nbs in active_site.nbs %}
                        <option value="{{ nbs.id }}">{{ nbs.title }}</option>
                   {% endfor %}
@@ -144,7 +144,7 @@
              <br>
              <br>
              <button type="button" class="btn btn-outline-info mx-5" data-bs-dismiss="modal">Cancel</button>
-             <input class="btn btn-outline-info" type="submit" value="Remove NBS">
+             <input class="btn btn-outline-info mx-5" type="submit" value="Remove NBS">
         </form>
      </div>
      </div>

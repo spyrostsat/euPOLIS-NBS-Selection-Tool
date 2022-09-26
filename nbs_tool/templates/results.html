@@ -138,7 +138,7 @@
      // Configurations
      // Chart.register.apply(null, Object.values(CHART).filter((chartClass) => (chartClass.id)));
      Chart.defaults.font.size = 16;
-     Chart.defaults.font.family = 'serif';
+     Chart.defaults.font.family = 'Helvetica';
 
      // Plots plugin function to make the black background disappear from the downloadable pdf
      const bgColor = {
@@ -226,7 +226,10 @@
                  title: {
                       display: true,
                       text: "Nature of Concerns",
-                      font: {size: 26}
+                      font: {
+                           size: 30,
+                           weight: 'normal'
+                      }
                  },
                  bgColor: {
                      backgroundColor: "#ffffff"
@@ -349,7 +352,10 @@
                  title: {
                       display: true,
                       text: "Site Concern Score",
-                      font: {size: 26}
+                      font: {
+                           size: 30,
+                           weight: 'normal'
+                      }
                  },
                  bgColor: {
                       backgroundColor: "#ffffff"
@@ -407,7 +413,10 @@
                  title: {
                       display: true,
                       text: "Severity of Issues/Concerns at the Site",
-                      font: {size: 26}
+                      font: {
+                           size: 30,
+                           weight: 'normal'
+                      }
                  },
                  bgColor: {
                       backgroundColor: "#ffffff"

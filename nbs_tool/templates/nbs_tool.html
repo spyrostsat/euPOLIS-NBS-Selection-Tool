@@ -43,8 +43,8 @@
    </button>
  </div>
  <div class="modal-footer">
-   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-     <input class="btn btn-danger" type="submit" value="Delete Site">
+   <button type="button" class="btn btn-outline-info me-5" data-bs-dismiss="modal">Cancel</button>
+     <input class="btn btn-outline-info mx-5" type="submit" value="Delete Site">
  </div>
 </div>
 </div>
@@ -238,7 +238,7 @@
           </div>
           <div class="modal-footer">
              <form action="{{ url_for('remove_concern')}}" method="POST">
-                  <select name="concern_to_remove" style="font-size:22px;">
+                  <select name="concern_to_remove" style="font-size:16px;">
                        {% for concern in all_ci_ordered %}
                             <option value="{{ concern.id }}">{{ concern.title }}</option>
                        {% endfor %}
