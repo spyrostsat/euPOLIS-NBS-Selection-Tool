@@ -87,8 +87,8 @@
 <div class="modal-footer">
    <form action="{{ url_for('update_active_site_title')}}" method="POST">
         <input class="text-center form-control form-control-lg" type="text" name="site_title" size="40" value="{{ active_site.title }}">
-        <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Cancel</button>
-        <input class="btn btn-info mt-3 ms-5" type="submit" value="Change Title">
+        <button type="button" class="btn btn-outline-info mt-3 ms-5 me-3" data-bs-dismiss="modal">Cancel</button>
+        <input class="btn btn-outline-info mt-3 ms-5" type="submit" value="Change Title">
    </form>
 </div>
 </div>
@@ -102,63 +102,66 @@
           <button type="button" class="btn btn-outline-info btn-md" data-bs-toggle="modal" data-bs-target="#TitleModal">Modify Title</button>
      </div>
 
-
-     <form class="" action="{{ url_for('update_nbs_data') }}" method="POST">
-          <div class="table-responsive container text-center mt-4" style="font-size: 14px;">
-               <table id="my-table" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Site's Main Concerns Assessment</caption>
-                    <thead class="thead-dark">
-                    <tr>
-                          <th scope="col" class="align-middle">#</th>
-                          <th scope="col" class="align-middle">Category</th>
-                          <th scope="col" class="align-middle">Concern</th>
-                          <th scope="col" class="align-middle">Concern Importance</th>
-                          <th scope="col" class="align-middle">Top Site Concern?<br>(Up to 3)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for i in range(all_ci_ordered|length) %}
+     <div class="row container justify-content-center align-items-center">
+       <div class="col">
+          <form class="" action="{{ url_for('update_nbs_data') }}" method="POST">
+               <div class="table-responsive text-center mt-4" style="font-size: 14px;">
+                    <table id="my-table" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                         <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Site's Main Concerns Assessment</caption>
+                         <thead class="thead-dark">
                          <tr>
-                          <th scope="row" class="align-middle">{{ i + 1 }}</th>
-                          <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].category }}</td>
-                          <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].title }}</td>
-                          <td style="vertical-align : middle;text-align:center;">
-                               <select name="ci_{{i}}_importance">
-                                    {% for importance in ci_importances %}
-                                       <option value="{{ importance }}"
-                                            {% if importance==all_ci_ordered[i].importance %}
-                                                 selected="selected"
-                                            {% endif %}
-                                            >
-                                            {{ importance }}
-                                       </option>
-                                    {% endfor %}
-                               </select>
-                          </td>
-                          <td>
-                               <select name="ci_{{i}}_top">
-                                    {% for top in ci_tops %}
-                                       <option value="{{ top }}"
-                                            {% if top==all_ci_ordered[i].top %}
-                                                 selected="selected"
-                                            {% endif %}
-                                            >
-                                            {{ top }}
-                                       </option>
-                                    {% endfor %}
-                               </select>
-                         </td>
+                               <th scope="col" class="align-middle">#</th>
+                               <th scope="col" class="align-middle">Category</th>
+                               <th scope="col" class="align-middle">Concern</th>
+                               <th scope="col" class="align-middle">Concern Importance</th>
+                               <th scope="col" class="align-middle">Top Site Concern?<br>(Up to 3)</th>
                          </tr>
-                    {% endfor %}
-                    <tfoot>
-                         <tr>
-                              <th colspan="5" class="pt-3 pb-3"><input class="fs-4 btn btn-outline-info" type="submit" value="Save Changes"></th>
-                         </tr>
-                    </tfoot>
-                    </tbody>
-               </table>
+                         </thead>
+                         <tbody>
+                         {% for i in range(all_ci_ordered|length) %}
+                              <tr>
+                               <th scope="row" class="align-middle">{{ i + 1 }}</th>
+                               <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].category }}</td>
+                               <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].title }}</td>
+                               <td style="vertical-align : middle;text-align:center;">
+                                    <select name="ci_{{i}}_importance">
+                                         {% for importance in ci_importances %}
+                                            <option value="{{ importance }}"
+                                                 {% if importance==all_ci_ordered[i].importance %}
+                                                      selected="selected"
+                                                 {% endif %}
+                                                 >
+                                                 {{ importance }}
+                                            </option>
+                                         {% endfor %}
+                                    </select>
+                               </td>
+                               <td>
+                                    <select name="ci_{{i}}_top">
+                                         {% for top in ci_tops %}
+                                            <option value="{{ top }}"
+                                                 {% if top==all_ci_ordered[i].top %}
+                                                      selected="selected"
+                                                 {% endif %}
+                                                 >
+                                                 {{ top }}
+                                            </option>
+                                         {% endfor %}
+                                    </select>
+                              </td>
+                              </tr>
+                         {% endfor %}
+                         <tfoot>
+                              <tr>
+                                   <th colspan="5" class="pt-3 pb-3"><input class="fs-4 btn btn-outline-info" type="submit" value="Save Changes"></th>
+                              </tr>
+                         </tfoot>
+                         </tbody>
+                    </table>
+               </div>
+          </form>
           </div>
-     </form>
+     </div>
 
      <div class="container">
        <div class="row align-items-center">

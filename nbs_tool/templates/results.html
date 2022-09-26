@@ -12,77 +12,90 @@
      </div>
 </div>
 
+<div class="container">
+     <div class="row container justify-content-center align-items-center">
+      <div class="col">
+          <div class="table-responsive text-center" style="font-size: 14px;">
+               <table id="table-1" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+               <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Site's Main Concerns - Baseline Assessment</caption>
+               <thead class="thead-dark">
+                    <tr>
+                     <th scope="col" class="align-middle text-center">#</th>
+                     <th scope="col" class="align-middle text-center">Category</th>
+                     <th scope="col" class="align-middle text-center">Concern</th>
+                     <th scope="col" class="align-middle text-center">Concern's Importance</th>
+                     <th scope="col" class="align-middle text-center">Top Site Concern?<br>(Up to 3)</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    {% for i in range(all_ci_ordered|length) %}
+                         <tr>
+                          <th scope="row" class="align-middle">{{ i + 1 }}</th>
+                          <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].category }}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].title }}</td>
+                          <td style="vertical-align : middle;text-align:center;">
+                                    {% for importance in ci_importances %}
+                                       {% if importance==all_ci_ordered[i].importance %}
+                                             {{ importance }}
+                                       {% endif %}
+                                    {% endfor %}
+                          </td>
+                          <td style="vertical-align : middle;text-align:center;">
+                               {% for top in ci_tops %}
+                                  {% if top==all_ci_ordered[i].top %}
+                                        {{ top }}
+                                  {% endif %}
+                               {% endfor %}
+                          </td>
+                         </tr>
+                    {% endfor %}
+                 </tbody>
+               </table>
+          </div>
+     </div>
+     </div>
+</div>
 
-<div class="table-responsive container text-center" style="font-size: 14px;">
-     <table id="table-1" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-     <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">Site's Main Concerns - Baseline Assessment</caption>
-     <thead class="thead-dark">
-          <tr>
-           <th scope="col" class="align-middle text-center">#</th>
-           <th scope="col" class="align-middle text-center">Category</th>
-           <th scope="col" class="align-middle text-center">Concern</th>
-           <th scope="col" class="align-middle text-center">Concern's Importance</th>
-           <th scope="col" class="align-middle text-center">Top Site Concern?<br>(Up to 3)</th>
-          </tr>
-     </thead>
-     <tbody>
-          {% for i in range(all_ci_ordered|length) %}
-               <tr>
-                <th scope="row" class="align-middle">{{ i + 1 }}</th>
-                <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].category }}</td>
-                <td style="vertical-align : middle;text-align:center;">{{ all_ci_ordered[i].title }}</td>
-                <td style="vertical-align : middle;text-align:center;">
-                          {% for importance in ci_importances %}
-                             {% if importance==all_ci_ordered[i].importance %}
-                                   {{ importance }}
-                             {% endif %}
-                          {% endfor %}
-                </td>
-                <td style="vertical-align : middle;text-align:center;">
-                     {% for top in ci_tops %}
-                        {% if top==all_ci_ordered[i].top %}
-                              {{ top }}
-                        {% endif %}
-                     {% endfor %}
-                </td>
-               </tr>
-          {% endfor %}
-       </tbody>
-     </table>
-     <br>
 
-     <table id="table-2" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          <thead class="thead-dark">
-          <tr>
-          <th scope="col" class="align-middle text-center"></th>
-           <th scope="col" class="align-middle text-center">Urban</th>
-           <th scope="col" class="align-middle text-center">Environmental</th>
-           <th scope="col" class="align-middle text-center">Social</th>
-           <th scope="col" class="align-middle text-center">Economic</th>
-           <th scope="col" class="align-middle text-center">PH & WB</th>
-           <th scope="col" class="align-middle text-center">Overall</th>
-          </tr>
-          </thead>
-          <tbody>
-               <tr>
-                <th scope="row" class="align-middle text-center">Site Concern Distribution (%)</th>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[0]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[1]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[2]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[3]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[4]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">100.00</td>
-               </tr>
-               <tr>
-                <th scope="row" class="align-middle text-center">Site Concern Score</th>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[0]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[1]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[2]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[3]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[4]|float}}</td>
-                <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[5]|float}}</td>
-               </tr>
-     </table>
+<div class="container">
+     <div class="row container justify-content-center align-items-center">
+      <div class="col">
+          <div class="table-responsive text-center" style="font-size: 14px;">
+               <table id="table-2" class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <thead class="thead-dark">
+                    <tr>
+                    <th scope="col" class="align-middle text-center"></th>
+                     <th scope="col" class="align-middle text-center">Urban</th>
+                     <th scope="col" class="align-middle text-center">Environmental</th>
+                     <th scope="col" class="align-middle text-center">Social</th>
+                     <th scope="col" class="align-middle text-center">Economic</th>
+                     <th scope="col" class="align-middle text-center">PH & WB</th>
+                     <th scope="col" class="align-middle text-center">Overall</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                          <th scope="row" class="align-middle text-center">Site Concern Distribution (%)</th>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[0]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[1]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[2]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[3]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_percentages_100[4]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">100.00</td>
+                         </tr>
+                         <tr>
+                          <th scope="row" class="align-middle text-center">Site Concern Score</th>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[0]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[1]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[2]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[3]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[4]|float}}</td>
+                          <td style="vertical-align : middle;text-align:center;">{{'%0.2f' % actual_max_percentages_100[5]|float}}</td>
+                         </tr>
+               </table>
+          </div>
+     </div>
+     </div>
 </div>
 
 <div class="container mt-4">

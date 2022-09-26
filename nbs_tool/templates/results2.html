@@ -12,133 +12,144 @@
      </div>
 </div>
 
-<div class="table-responsive container text-center" style="font-size: 14px;">
-     <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Impacts Against Every Main Concern</caption>
-          <thead class="thead-dark">
-          <tr>
-           <th scope="col" class="align-middle">#</th>
-           <th scope="col" class="align-middle">Concern</th>
-           {% for i in range(total_nbs_counter) %}
-                <th scope="col" class="align-middle">{{ nbs_names_html[i] }}</th>
-           {% endfor %}
-          </tr>
-          </thead>
-          <tbody>
-               {% for i in range(total_ci_counter) %}
+<div class="container">
+     <div class="row container justify-content-center align-items-center">
+          <div class="table-responsive text-center" style="font-size: 14px;">
+               <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Impacts Against Every Main Concern</caption>
+                    <thead class="thead-dark">
                     <tr>
-                    <th scope="row" class="align-middle">{{ i + 1 }}</th>
-
-                    <td>{{ all_ci_ordered[i].title }}</td>
-
-                    {% for j in range(total_nbs_counter) %}
-                         <td>{{ all_nbs_ci_ordered[i][j].impact }}</td>
-                    {% endfor %}
+                     <th scope="col" class="align-middle">#</th>
+                     <th scope="col" class="align-middle">Concern</th>
+                     {% for i in range(total_nbs_counter) %}
+                          <th scope="col" class="align-middle">{{ nbs_names_html[i] }}</th>
+                     {% endfor %}
                     </tr>
-               {% endfor %}
-          </tbody>
-     </table>
-</div>
+                    </thead>
+                    <tbody>
+                         {% for i in range(total_ci_counter) %}
+                              <tr>
+                              <th scope="row" class="align-middle">{{ i + 1 }}</th>
 
-<div class="table-responsive container text-center my-4" style="font-size: 14px;">
-     <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Overall Performance</caption>
-          <thead class="thead-dark">
-               <tr>
-                    <th scope="col" class="align-middle">Scores</th>
-                    {% for i in range(1, total_nbs_counter+1) %}
-                         <th scope="col" class="align-middle" id="solution-{{ i }}">{{ all_nbs_ordered[i-1].title }}</th>
-                    {% endfor %}
-               </tr>
-          </thead>
-          <tbody>
-               <tr>
-                    <th scope="row">Urban Score</th>
-                    {% for i in range(total_nbs_counter) %}
-                         <td>
-                              {{ "%.2f"|format(final_scores[0][i] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-               <tr>
-                    <th scope="row">Environmental Score</th>
-                    {% for i in range(total_nbs_counter) %}
-                         <td>
-                              {{ "%.2f"|format(final_scores[1][i] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-               <tr>
-                    <th scope="row">Social Score</th>
-                    {% for i in range(total_nbs_counter) %}
-                         <td>
-                              {{ "%.2f"|format(final_scores[2][i] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-               <tr>
-                    <th scope="row">Economic Score</th>
-                    {% for i in range(total_nbs_counter) %}
-                         <td>
-                              {{ "%.2f"|format(final_scores[3][i] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-               <tr>
-                    <th scope="row">PW & WB Score</th>
-                    {% for i in range(total_nbs_counter) %}
-                         <td>
-                              {{ "%.2f"|format(final_scores[4][i] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-               <tr>
-                    <th scope="row">Overall Score</th>
+                              <td>{{ all_ci_ordered[i].title }}</td>
 
-                    {% for i in range(1, total_nbs_counter+1) %}
-                         <td id="nbs_{{i}}_overall_score">
-                              {{ "%.2f"|format(final_scores[5][i-1] * 100) }}
-                         </td>
-                    {% endfor %}
-               </tr>
-          </tbody>
-     </table>
-</div>
-
-
-<div class="table-responsive container text-center my-4" style="font-size: 14px;">
-     <table id="top-priority-table" class="table table-hover table-bordered table-light table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
-          {% if top_counter == 0 %}
-               <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
-          {% else %}
-               <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Performance Against Top Priorities</caption>
-          {% endif %}
-          <thead class="thead-dark">
-               <tr>
-                    <th scope="col" class="align-middle">NBS (Descending Order)</th>
-                    <th scope="col" class="align-middle">NBS Overall Score</th>
-
-                    {% for i in range(total_ci_counter) %}
-                         {% if all_ci_ordered[i].top == "Yes" %}
-                              <th scope="col" class="align-middle">{{ all_ci_ordered[i].title }}</th>
-                         {% endif %}
-                    {% endfor %}
-               </tr>
-          </thead>
-          <tbody>
-               {% for i in range(total_nbs_counter) %}
-                    <tr>
-                         <th scope="row">{{ nbs_descending_order[i].title }}</th>
-                         <td>{{ "%.2f"|format(overall_scores_descending_order[i] * 100) }}</td>
-
-                         {% for j in range(nbs_descending_order_against_top[i]|length) %}
-                         <td>{{ nbs_descending_order_against_top[i][j] }}</td>
+                              {% for j in range(total_nbs_counter) %}
+                                   <td>{{ all_nbs_ci_ordered[i][j].impact }}</td>
+                              {% endfor %}
+                              </tr>
                          {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+     </div>
+</div>
 
-                    </tr>
-               {% endfor %}
-          </tbody>
-     </table>
+<div class="container">
+     <div class="row container justify-content-center align-items-center">
+          <div class="table-responsive text-center my-4" style="font-size: 14px;">
+               <table class="table table-hover table-bordered table-light table-sm table-striped" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Overall Performance</caption>
+                    <thead class="thead-dark">
+                         <tr>
+                              <th scope="col" class="align-middle">Scores</th>
+                              {% for i in range(1, total_nbs_counter+1) %}
+                                   <th scope="col" class="align-middle" id="solution-{{ i }}">{{ all_nbs_ordered[i-1].title }}</th>
+                              {% endfor %}
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th scope="row">Urban Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[0][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Environmental Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[1][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Social Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[2][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Economic Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[3][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">PW & WB Score</th>
+                              {% for i in range(total_nbs_counter) %}
+                                   <td>
+                                        {{ "%.2f"|format(final_scores[4][i] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                         <tr>
+                              <th scope="row">Overall Score</th>
+
+                              {% for i in range(1, total_nbs_counter+1) %}
+                                   <td id="nbs_{{i}}_overall_score">
+                                        {{ "%.2f"|format(final_scores[5][i-1] * 100) }}
+                                   </td>
+                              {% endfor %}
+                         </tr>
+                    </tbody>
+               </table>
+          </div>
+     </div>
+</div>
+
+<div class="container">
+     <div class="row container justify-content-center align-items-center">
+          <div class="table-responsive text-center my-4" style="font-size: 14px;">
+               <table id="top-priority-table" class="table table-hover table-bordered table-light table-sm" border="1" style="border:2px solid #000000; border-collapse:collapse">
+                    {% if top_counter == 0 %}
+                         <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Performance Against Top Priorities (no top priorities specified)</caption>
+                    {% else %}
+                         <caption class="text-muted" style="caption-side:top; text-align:center; color:#000000; font-size:30px;">NBS Performance Against Top Priorities</caption>
+                    {% endif %}
+                    <thead class="thead-dark">
+                         <tr>
+                              <th scope="col" class="align-middle">NBS (Descending Order)</th>
+                              <th scope="col" class="align-middle">NBS Overall Score</th>
+
+                              {% for i in range(total_ci_counter) %}
+                                   {% if all_ci_ordered[i].top == "Yes" %}
+                                        <th scope="col" class="align-middle">{{ all_ci_ordered[i].title }}</th>
+                                   {% endif %}
+                              {% endfor %}
+                         </tr>
+                    </thead>
+                    <tbody>
+                         {% for i in range(total_nbs_counter) %}
+                              <tr>
+                                   <th scope="row">{{ nbs_descending_order[i].title }}</th>
+                                   <td>{{ "%.2f"|format(overall_scores_descending_order[i] * 100) }}</td>
+
+                                   {% for j in range(nbs_descending_order_against_top[i]|length) %}
+                                   <td>{{ nbs_descending_order_against_top[i][j] }}</td>
+                                   {% endfor %}
+
+                              </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+     </div>
 </div>
 
 <!-- GRAPH 1 - Overall Scores of all NBS -->
