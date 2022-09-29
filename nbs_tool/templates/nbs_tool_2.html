@@ -153,7 +153,7 @@
                </div>
                <div class="modal-footer">
                   <form action="{{ url_for('remove_nbs')}}" method="POST">
-                       <select name="nbs_to_remove" style="font-size:20px;">
+                       <select name="nbs_to_remove">
                             {% for nbs in active_site.nbs %}
                                  <option value="{{ nbs.id }}">{{ nbs.title }}</option>
                             {% endfor %}
