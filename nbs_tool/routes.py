@@ -115,7 +115,7 @@ def register_page():
             db.session.add(new_nbs_ci)
             db.session.commit()
 
-        flash(f'Your account has been created. Please login to access the NBS Tool!', 'info')
+        flash(f'Your account has been created!', 'info')
         return redirect(url_for('login_page'))
     return render_template('register.html', title="Register", form=form)
 
@@ -165,7 +165,7 @@ def delete_account():
     db.session.delete(current_user)
     db.session.commit()
 
-    flash('Your account has been deleted!', 'info')
+    flash('Your account has been deleted.', 'info')
     return redirect(url_for('home_page'))
 
 
